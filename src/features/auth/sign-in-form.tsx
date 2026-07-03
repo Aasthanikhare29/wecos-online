@@ -1,0 +1,59 @@
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import { signInSchema, type SignInValues } from "@/features/auth/schema";
+import { useAppStore } from "@/lib/store/app-store";
+import { Field } from "@/components/form/field";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+export function SignInForm() {
+  const router = useRouter();
+  const signIn = useAppStore((s) => s.signIn);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignInValues>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: { email: "", password: "" },
+  });
+
+  const onSubmit = (values: SignInValues) => {
+    signIn({ email: values.email });
+    toast.success("Welcome back");
+    router.push("/dashboard");
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <Field label="Email" htmlFor="email" error={errors.email?.message}>
+        <Input id="email" type="email" autoComplete="email" placeholder="you@example.com" {...register("email")} />
+      </Field>
+      <Field label="Password" htmlFor="password" error={errors.password?.message}>
+        <Input
+          id="password"
+          type="password"
+          autoComplete="current-password"
+          placeholder="••••••••"
+          {...register("password")}
+        />
+      </Field>
+      <div className="flex justify-end">
+        <Link
+          href="/forgot-password"
+          className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+        >
+          Forgot password?
+        </Link>
+      </div>
+      <Button type="submit" disabled={isSubmitting} className="h-10 w-full">
+        Sign in
+      </Button>
+    </form>
+  );
+}

@@ -1,0 +1,269 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  WeCos design tokens — semantic, single source of truth.
+  Brand matches the existing WeCos website: purple #8E28FF primary,
+  gold #F5BF03 accent, cream #F6F4F0 surfaces, ink #0A0B0C text,
+  indigo #6161DD support. Font: Open Sauce Sans.
+  Never hardcode colors in components — always reference these tokens.
+*/
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  /* Brand accents for gradients / highlights / badges */
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-indigo: var(--brand-indigo);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --radius: 0.625rem;
+  --font-sans: "Open Sauce Sans", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  /* Surfaces — warm cream / white */
+  --background: #fbfaf8;
+  --foreground: #0a0b0c;
+  --card: #ffffff;
+  --card-foreground: #0a0b0c;
+  --popover: #ffffff;
+  --popover-foreground: #0a0b0c;
+
+  /* Brand — purple (white text contrast 5.39:1) */
+  --primary: #8e28ff;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f4f1ec;
+  --secondary-foreground: #141717;
+  --muted: #f1eee9;
+  --muted-foreground: #5a6161;
+  --accent: #f3ecfe;
+  --accent-foreground: #6a23c9;
+
+  /* Semantic */
+  --destructive: #e5484d;
+  --destructive-foreground: #ffffff;
+  --success: #1f9d55;
+  --success-foreground: #ffffff;
+  --warning: #f5bf03;
+  --warning-foreground: #3a2d00;
+  --info: #6161dd;
+  --info-foreground: #ffffff;
+
+  --brand: #8e28ff;
+  --brand-strong: #7438d0;
+  --brand-gold: #f5bf03;
+  --brand-indigo: #6161dd;
+
+  --border: #e6e2db;
+  --input: #e6e2db;
+  --ring: #8e28ff;
+
+  --chart-1: #8e28ff;
+  --chart-2: #f5bf03;
+  --chart-3: #6161dd;
+  --chart-4: #7438d0;
+  --chart-5: #6665ca;
+
+  --sidebar: #fbfaf8;
+  --sidebar-foreground: #0a0b0c;
+  --sidebar-primary: #8e28ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f3ecfe;
+  --sidebar-accent-foreground: #6a23c9;
+  --sidebar-border: #e6e2db;
+  --sidebar-ring: #8e28ff;
+}
+
+.dark {
+  /* Surfaces — deep ink */
+  --background: #0e1011;
+  --foreground: #f4f2ee;
+  --card: #16191a;
+  --card-foreground: #f4f2ee;
+  --popover: #16191a;
+  --popover-foreground: #f4f2ee;
+
+  /* Brand — slightly lifted purple on dark */
+  --primary: #9333ff;
+  --primary-foreground: #ffffff;
+
+  --secondary: #1e2122;
+  --secondary-foreground: #f4f2ee;
+  --muted: #1e2122;
+  --muted-foreground: #9ba1a1;
+  --accent: #281a3d;
+  --accent-foreground: #d9c2ff;
+
+  --destructive: #f2555a;
+  --destructive-foreground: #ffffff;
+  --success: #34b36a;
+  --success-foreground: #07210f;
+  --warning: #f5bf03;
+  --warning-foreground: #2a2100;
+  --info: #7b7be6;
+  --info-foreground: #0b0b22;
+
+  --brand: #9333ff;
+  --brand-strong: #8048d6;
+  --brand-gold: #f5bf03;
+  --brand-indigo: #7b7be6;
+
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: #9333ff;
+
+  --chart-1: #9333ff;
+  --chart-2: #f5bf03;
+  --chart-3: #7b7be6;
+  --chart-4: #a06bff;
+  --chart-5: #8a89e0;
+
+  --sidebar: #16191a;
+  --sidebar-foreground: #f4f2ee;
+  --sidebar-primary: #9333ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #281a3d;
+  --sidebar-accent-foreground: #d9c2ff;
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: #9333ff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  ::selection {
+    background-color: color-mix(in oklch, var(--primary) 22%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@keyframes heart-pop {
+  0% {
+    transform: scale(0.6);
+  }
+
+  40% {
+    transform: scale(1.2);
+  }
+
+  70% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-heart {
+  animation: heart-pop 0.35s ease;
+}
+
+@keyframes float-heart {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  20% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+  opacity: 0;
+  transform:
+    translate(var(--tx), var(--ty))
+    scale(1.4);
+}
+}
+
+.heart-particle {
+  position: absolute;
+  pointer-events: none;
+  animation: float-heart 0.7s ease-out forwards;
+}
+
