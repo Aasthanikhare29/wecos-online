@@ -278,8 +278,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 
   return (
 <div className="mx-auto max-w-7xl bg-[#f8f7f2] px-4 py-6 sm:px-6 lg:px-8">
-<div className="grid items-start gap-8 lg:grid-cols-[70%_30%]">
-      <div className="space-y-4">
+<div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="space-y-4">
       {/* Header */}
       <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
   <div className="relative z-10 ">
@@ -300,8 +300,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 </div>
 
       <div>
-        <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold lg:text-3xl">{data.name}</h1>
+        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <h1 className="text-2xl font-bold sm:text-3xl">{data.name}</h1>
           {data.verified ? (
             <span className="inline-flex items-center gap-2 rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700">
               <BadgeCheck className="size-4" />
@@ -316,10 +316,10 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
       </div>
     </div>
 
-    <div className="mt-5 flex flex-wrap gap-4">
+    <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 <button
   onClick={() => setShowEnquiryModal(true)}
-  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-violet-500 px-8 py-3 text-sm font-semibold text-white shadow-lg "
+  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-violet-500 px-8 py-3 text-sm font-semibold text-white shadow-lg sm:w-auto"
 >
   <Rocket className="size-4" />
   Enquire Now
@@ -329,7 +329,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   href="https://www.bookasloth.com"
   target="_blank"
   rel="noopener noreferrer"
-  className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-900 backdrop-blur transition hover:bg-white/20"
+  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-900 backdrop-blur transition hover:bg-white/20 sm:w-auto"
 >
   <CalendarDays className="size-4" />
   Book a Meeting
@@ -522,8 +522,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   </p>
 )}
 
-<div className="mt-4 hidden justify-center gap-2 group-hover:flex">
-    <a
+<div className="mt-4 flex flex-wrap justify-center gap-2">
+      <a
     href="#"
     className="grid size-9 place-items-center rounded-lg bg-[#0A66C2]/10 text-[#0A66C2] transition hover:scale-110"
   >
@@ -625,7 +625,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
         );
       })}
     </div>
-    <div className="mt-8 grid grid-cols-2 gap-y-6 sm:grid-cols-4">
+    <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
    {[
   {
     icon: Users,
@@ -650,8 +650,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 ].map(({ icon: Icon, value, label }) => (
   <div
     key={label}
-    className="flex items-start gap-3 px-4 border-r border-slate-200 last:border-r-0"
-  >
+    className="flex items-start gap-3 rounded-xl border border-slate-100 bg-white p-4"
+>
 <div className="mt-1 grid size-10 shrink-0 place-items-center rounded-lg bg-purple-600 text-white">
       <Icon className="size-5" />
     </div>
@@ -731,7 +731,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
     </div>
   </div>
 
-  <div className="mt-5 grid gap-3 sm:grid-cols-3">
+  <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
     {[
       {
         name: "Company Profile",
@@ -1149,7 +1149,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 </aside>
 {showEnquiryModal && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-    <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+    <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-bold">
           Send Enquiry
