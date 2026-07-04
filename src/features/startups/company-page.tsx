@@ -7,6 +7,7 @@ import {
   ExternalLink,
   MessageCircle,
   Rocket,
+  TrendingUp,
   Star,
   Building,
   ShieldCheck,
@@ -192,10 +193,12 @@ useEffect(() => {
 
 const profileTabs = [
   { id: "services", label: "Services" },
-  { id: "team", label: "Team" },
   { id: "clients", label: "Clients" },
+  { id: "team", label: "Team" },
   { id: "updates", label: "Recent Updates" },
   { id: "roles", label: "Open Roles" },
+  { id: "highlights", label: "Highlights" },
+  { id: "operations", label: "Operations" },
 ];
 
   const show = {
@@ -275,7 +278,7 @@ className="group relative w-[180px] overflow-hidden rounded-2xl border border-bo
 
 
   return (
-<div className="mx-auto w-full max-w-7xl overflow-hidden bg-background px-4 py-6 text-foreground sm:px-6 lg:px-8">
+<div className="mx-auto w-full max-w-7xl bg-background px-4 py-6 text-foreground sm:px-6 lg:px-8">
 <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div className="min-w-0 space-y-4">
       {/* Header */}
@@ -362,27 +365,16 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
             </Card>
           )}
 
-          {/* Highlights / stats */}
-          {show.stats && (
-            <Card className="p-5 sm:p-6">
-              <h2 className="text-lg font-semibold">Highlights</h2>
-              <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
-                {data.stats!.map((s) => (
-                  <Metric key={s.label} label={s.label} value={s.value} />
-                ))}
-              </div>
-            </Card>
-          )}
 <Card className="overflow-hidden">
-<div className="flex overflow-x-auto border-b border-border">
-    {profileTabs.map((tab) => (
+  <div className="flex items-center justify-between border-b border-border px-3">
+        {profileTabs.map((tab) => (
       <button
         key={tab.id}
         onClick={() => setActiveSection(tab.id)}
         className={cn(
-          "whitespace-nowrap px-6 py-4 text-sm font-semibold text-muted-foreground transition",
+ "relative flex-1 whitespace-nowrap px-3 py-4 text-center text-sm font-semibold text-muted-foreground transition hover:text-purple-600",
           activeSection === tab.id &&
-            "border-b-2 border-purple-600 text-purple-600"
+            "text-purple-600 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-purple-600"
         )}
       >
         {tab.label}
@@ -644,18 +636,18 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
 ].map(({ icon: Icon, value, label }) => (
   <div
     key={label}
-    className="flex items-start gap-3 rounded-xl border border-border bg-card p-4"
+    className="flex items-start gap-2 rounded-xl border border-border bg-card p-3"
 >
 <div className="mt-1 grid size-10 shrink-0 place-items-center rounded-lg bg-purple-600 text-white">
       <Icon className="size-5" />
     </div>
 
     <div className="flex min-w-0 flex-col">
-      <p className="text-2xl font-bold leading-none text-foreground">
+      <p className="text-lg font-bold leading-none text-foreground">
         {value}
       </p>
 
-      <p className="mt-1 whitespace-nowrap text-sm leading-tight text-muted-foreground">
+      <p className="mt-1 whitespace-nowrap text-xs leading-tight text-muted-foreground">
   {label}
 </p>
     </div>
@@ -711,6 +703,108 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
         </ul>
       </div>
     )}
+    {activeSection === "highlights" && show.stats && (
+  <div>
+    <h2 className="text-lg font-bold">Company Highlights</h2>
+    <p className="mt-1 text-sm text-muted-foreground">
+      Key numbers that show company growth and performance.
+    </p>
+
+    <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
+      {data.stats!.map((s, index) => {
+        const colors = [
+          "bg-purple-100 text-purple-600",
+          "bg-blue-100 text-blue-600",
+          "bg-green-100 text-green-600",
+          "bg-orange-100 text-orange-600",
+          "bg-pink-100 text-pink-600",
+          "bg-yellow-100 text-yellow-600",
+        ];
+
+        const icons = [Rocket, Users, Globe, Star, Building2, TrendingUp];
+        const Icon = icons[index % icons.length];
+
+        return (
+  <div
+    key={s.label}
+    className="flex items-center gap-3 rounded-xl border border-border bg-card p-5 "
+  >
+    <div
+      className={cn(
+        "grid size-14 shrink-0 place-items-center rounded-2xl",
+        colors[index % colors.length]
+      )}
+    >
+      <Icon className="size-7" />
+    </div>
+
+    <div className="min-w-0">
+      <p className="text-xl font-bold leading-none text-foreground">
+        {s.value}
+      </p>
+
+      <p className="mt-2 text-sm leading-tight text-muted-foreground">
+        {s.label}
+      </p>
+    </div>
+  </div>
+);
+      })}
+    </div>
+  </div>
+)}
+{activeSection === "operations" && (
+  <div>
+    <h2 className="text-lg font-bold">Operations</h2>
+    <p className="mt-1 text-sm text-muted-foreground">
+      Operating centres and key locations.
+    </p>
+
+    <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {[
+        {
+          title: "Hawthorne HQ",
+          location: "California, USA",
+          type: "Headquarters",
+        },
+        {
+          title: "Starbase",
+          location: "Texas, USA",
+          type: "Launch & Testing Centre",
+        },
+        {
+          title: "Cape Canaveral",
+          location: "Florida, USA",
+          type: "Launch Operations",
+        },
+      ].map((item) => (
+        <div
+  key={item.title}
+  className="rounded-2xl border border-border bg-card p-5 shadow-sm"
+>
+  <div className="flex items-start gap-4">
+    {/* Icon */}
+    <div className="grid size-12 shrink-0 place-items-center rounded-xl bg-purple-100 text-purple-600">
+      <MapPin className="size-6" />
+    </div>
+
+    {/* Title + Location */}
+    <div className="min-w-0">
+      <h3 className="font-bold text-foreground">
+        {item.title}
+      </h3>
+
+      <p className="mt-1 text-sm text-muted-foreground">
+        {item.location}
+      </p>
+
+    </div>
+  </div>
+</div>
+      ))}
+    </div>
+  </div>
+)}
   </div>
 </Card>      
 {/*Documents */}
@@ -835,8 +929,8 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
         </div>
 
         {/* Right rail (persistent) */}
-        <aside className="min-w-0 space-y-5 lg:sticky lg:top-6">
-          <Card className="overflow-hidden p-4">
+<aside className="min-w-0 space-y-5 lg:sticky lg:top-6">
+            <Card className="overflow-hidden p-4">
   <div className="flex items-center justify-between">
     <div>
       <h3 className="text-sm font-bold">
@@ -1137,7 +1231,6 @@ className="flex min-w-0 items-center justify-between gap-3 py-1"      >
     ))}
   </div>
 </Card>
-
 </aside>
 {showEnquiryModal && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">

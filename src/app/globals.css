@@ -266,4 +266,18 @@
   pointer-events: none;
   animation: float-heart 0.7s ease-out forwards;
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.sidebar-scroll::-webkit-scrollbar {
+  width: 0;
+}
+
+.sidebar-scroll {
+  scrollbar-width: none;
+}
