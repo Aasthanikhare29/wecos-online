@@ -189,7 +189,27 @@ useEffect(() => {
   };
 }, [activeVideo]);
 
+useEffect(() => {
+  if (!aboutRef.current) return;
 
+  const el = aboutRef.current;
+  setShowReadMore(el.scrollHeight > el.clientHeight);
+}, [data.about]);
+useEffect(() => {
+  const el = aboutRef.current;
+
+  if (!el) return;
+
+  requestAnimationFrame(() => {
+    const lineHeight = parseFloat(
+      window.getComputedStyle(el).lineHeight
+    );
+
+    const maxHeight = lineHeight * 8;
+
+    setShowReadMore(el.scrollHeight > maxHeight);
+  });
+}, [data.about]);
 
 const profileTabs = [
   { id: "services", label: "Services" },
@@ -342,12 +362,12 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
               {data.about ? (
   <>
   <p
-    ref={aboutRef}
-    className={cn(
-      "mt-3 break-words text-sm leading-relaxed whitespace-pre-line text-foreground/90",
-      !showFullAbout && "line-clamp-9"
-    )}
-  >
+  ref={aboutRef}
+  className={cn(
+    "mt-3 break-words text-sm leading-relaxed whitespace-pre-line text-foreground/90 transition-all duration-500",
+    !showFullAbout && "line-clamp-8"
+  )}
+>
     {data.about}
   </p>
 
@@ -366,13 +386,13 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
           )}
 
 <Card className="overflow-hidden">
-  <div className="flex items-center justify-between border-b border-border px-3">
+      <div className="flex items-center justify-center gap-6 border-b border-border px-6">
         {profileTabs.map((tab) => (
       <button
         key={tab.id}
         onClick={() => setActiveSection(tab.id)}
         className={cn(
- "relative flex-1 whitespace-nowrap px-3 py-4 text-center text-sm font-semibold text-muted-foreground transition hover:text-purple-600",
+ "relative whitespace-nowrap px-3 py-5 text-sm font-semibold text-muted-foreground transition hover:text-purple-600",
           activeSection === tab.id &&
             "text-purple-600 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-purple-600"
         )}
@@ -458,23 +478,24 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
         return (
           <div
             key={m.name}
-            className="
-              group
-              relative
-              overflow-hidden
-              rounded-2xl
-              border
-              border-border
-              bg-card
-              p-5
-              text-center
-              shadow-sm
-              transition-all
-              duration-300
-              hover:border-purple-200
-            "
-          >
-            <div className="absolute" />
+  className="
+    group
+    relative
+    overflow-hidden
+    rounded-2xl
+    border
+    border-border
+    bg-card
+    p-5
+    text-center
+    shadow-sm
+    transition-all
+    duration-300
+    min-h-[250px]
+    hover:border-purple-200
+  "
+>
+  <div className="absolute" />
 
 <div className="mx-auto h-20 w-20 overflow-hidden rounded-full border-4 border-background shadow-md">
     {m.image ? (
@@ -503,12 +524,27 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
               {m.role}
             </p>
             {m.bio && (
-  <p className=" min-h-[48px] text-xs leading-5 text-muted-foreground">
-    {m.bio}
+<p className="min-h-[70px] text-xs leading-5 text-muted-foreground">
+      {m.bio}
   </p>
 )}
 
-<div className="mt-4 flex flex-wrap justify-center gap-2">
+<div
+  className="
+    mt-4
+    flex
+    flex-wrap
+    justify-center
+    gap-2
+    opacity-0
+    max-h-0
+    overflow-hidden
+    transition-all
+    duration-300
+    group-hover:max-h-20
+    group-hover:opacity-100
+  "
+>
       <a
     href="#"
     className="grid size-9 place-items-center rounded-lg bg-[#0A66C2]/10 text-[#0A66C2] transition hover:scale-110"

@@ -338,8 +338,8 @@ className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-bor
   {(s.topics ?? []).slice(0, 6).map((t) => (
     <span
       key={t}
-className="rounded-full border border-border bg-muted px-4 py-1.5 text-xs font-medium text-muted-foreground"    >
-      {t}
+className="rounded-full border border-border bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+       {t}
     </span>
   ))}
 </div>
