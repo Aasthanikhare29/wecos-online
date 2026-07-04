@@ -130,12 +130,12 @@ export default function HomePage() {
               powered by AI systems and guided by human mentors.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
               <Link
                 href="/sign-up"
                 className={cn(
                   buttonVariants({ variant: "default" }),
-                  "h-12 px-7 text-base"
+                  "h-12 w-full px-7 text-base sm:w-auto"
                 )}
               >
                 I Have an Idea
@@ -146,7 +146,7 @@ export default function HomePage() {
                 href="/membership"
                 className={cn(
                   buttonVariants({ variant: "outline" }),
-                  "h-12 px-7 text-base"
+                  "h-12 w-full px-7 text-base sm:w-auto"
                 )}
               >
                 I Already Have a Startup
@@ -188,13 +188,13 @@ export default function HomePage() {
         {problems.slice(0, 3).map(({ icon: Icon, problem, solution }, index) => (
           <div
             key={problem}
-            className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-purple-100 bg-white px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-200 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
+            className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-border bg-card px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-200 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
           >
-            <span className="absolute right-6 top-5 text-4xl font-extrabold text-purple-100 transition-colors group-hover:text-purple-200">
+            <span className="absolute right-6 top-5 text-4xl font-extrabold text-muted-foreground/20 transition-colors group-hover:text-primary/20">
               {String(index + 1).padStart(2, "0")}
             </span>
 
-            <div className="grid size-12 place-items-center rounded-xl bg-purple-50 text-purple-700">
+            <div className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary">
               <Icon className="size-5" />
             </div>
 
@@ -213,13 +213,13 @@ export default function HomePage() {
         {problems.slice(3).map(({ icon: Icon, problem, solution }, index) => (
           <div
             key={problem}
-            className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-purple-100 bg-white px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-200 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
+            className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-border bg-card px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-200 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
           >
-            <span className="absolute right-6 top-5 text-5xl font-extrabold text-purple-100 transition-colors group-hover:text-purple-200">
+            <span className="absolute right-6 top-5 text-5xl font-extrabold text-muted-foreground/20 transition-colors group-hover:text-primary/20">
               {String(index + 4).padStart(2, "0")}
             </span>
 
-            <div className="grid size-12 place-items-center rounded-xl bg-purple-50 text-purple-700">
+            <div className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary">
               <Icon className="size-5" />
             </div>
 
@@ -238,24 +238,24 @@ export default function HomePage() {
 </section>
 
 {/* How it works */}
-<section className="border-t border-border/60 bg-white py-20 sm:py-24">
+<section className="border-t border-border/60 bg-background py-20 sm:py-24">
   <Container>
     <div className="mx-auto max-w-3xl text-center">
-      <p className="text-sm font-bold uppercase tracking-wide text-purple-600">
-        How it works
+<p className="text-sm font-bold uppercase tracking-wide text-primary">
+          How it works
       </p>
 
-      <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-black sm:text-5xl">
+      <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl">
         Three calm steps from <br className="hidden sm:block" />
         idea to momentum.
       </h2>
     </div>
 
-    <div className="mt-16 grid gap-6 md:grid-cols-3">
+    <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {steps.map((step, i) => (
         <div
   key={step.title}
-  className="group rounded-[24px] border border-gray-200 bg-white p-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(124,58,237,0.12)]"
+  className="group rounded-[24px] border border-border bg-card p-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(124,58,237,0.12)]"
 >
   <span className="font-mono text-xl font-bold text-purple-600">
     0{i + 1}
@@ -269,11 +269,11 @@ export default function HomePage() {
     />
   </div>
 
-  <h3 className="mt-4 text-xl font-bold tracking-tight text-black">
+  <h3 className="mt-4 text-xl font-bold tracking-tight text-foreground">
     {step.title}
   </h3>
 
-  <p className="mt-3 text-sm leading-7 text-gray-500">
+  <p className="mt-3 text-sm leading-7 text-muted-foreground">
     {step.body}
   </p>
 </div>
@@ -284,8 +284,8 @@ export default function HomePage() {
 {/* Membership */}
 <section className="border-t border-border/60 py-20 sm:py-24">
   <Container>
-    <div className="mx-auto max-w-xl overflow-hidden rounded-3xl border border-purple-200 bg-white shadow-[0_24px_70px_rgba(124,58,237,0.12)]">
-      <div className="relative overflow-hidden border-b border-purple-100 bg-gradient-to-b from-purple-50/80 to-white p-8 text-center">
+    <div className="mx-auto max-w-xl overflow-hidden rounded-3xl border border-border bg-card shadow-[0_24px_70px_rgba(124,58,237,0.12)]">
+      <div className="relative overflow-hidden border-b border-border bg-gradient-to-b from-primary/10 to-card p-8 text-center">
         <div className="absolute left-1/2 top-6 h-36 w-36 -translate-x-1/2 rounded-full bg-purple-300/25 blur-3xl" />
 
         <div className="relative z-10">
@@ -313,7 +313,7 @@ export default function HomePage() {
         <ul className="grid gap-3">
           {benefits.map((b) => (
             <li key={b} className="flex items-start gap-3 text-sm">
-              <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-purple-100 text-purple-600">
+              <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
                 <Check className="size-3.5" />
               </span>
               <span className="text-foreground/90">{b}</span>

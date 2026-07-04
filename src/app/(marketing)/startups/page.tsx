@@ -108,7 +108,7 @@ const toggleCategory = (c: string) => {
 return (
   <Container className="py-8 sm:py-12">
     
-<div className="mb-8 flex flex-wrap items-start justify-between gap-4">
+<div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
   {/* LEFT SIDE */}
   <div>
     <h1 className="text-3xl font-bold tracking-tight">
@@ -121,7 +121,7 @@ return (
   </div>
 
   {/* RIGHT SIDE */}
-  <div className="flex items-center gap-4">
+  <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
   <p className="text-sm font-medium text-muted-foreground">
     Showing {list.length} startups
   </p>
@@ -131,7 +131,7 @@ return (
     href="/sign-in"
     className={cn(
       buttonVariants({ variant: "default" }),
-      "h-10 rounded-xl px-5 text-sm font-bold shadow-sm"
+      "h-10 w-full rounded-xl px-5 text-sm font-bold shadow-sm sm:w-auto"
     )}
   >
     + Submit Startup
@@ -143,7 +143,7 @@ return (
       <aside className="h-fit overflow-hidden rounded-2xl border border-border bg-card shadow-sm lg:sticky lg:top-24">
   {/* SEARCH */}
   <div className="border-b border-border p-5">
-    <h3 className="text-[11px] font-bold uppercase tracking-wide text-slate-700">
+    <h3 className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
       Search
     </h3>
 
@@ -161,7 +161,7 @@ return (
   {/* CATEGORIES */}
   <div className="border-b border-border p-5">
     <div className="flex items-center justify-between">
-      <h3 className="text-[11px] font-bold uppercase tracking-wide text-slate-700">
+      <h3 className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
         Categories
       </h3>
 
@@ -185,7 +185,7 @@ return (
       : selectedCategories.includes(c)
   }
   onChange={() => toggleCategory(c)}
-  className="size-5 rounded-none border-slate-300 accent-primary"
+  className="size-5 rounded-none border-border accent-primary"
 />
   <span
     className={
@@ -205,7 +205,7 @@ return (
 
   {/* TRENDING */}
   <div className="border-b border-border p-5">
-    <h3 className="text-[11px] font-bold uppercase tracking-wide text-slate-700">
+    <h3 className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
       Trending
     </h3>
 
@@ -227,7 +227,7 @@ return (
               "grid size-4 place-items-center rounded-full border",
               sort === item
                 ? "border-primary bg-primary"
-                : "border-slate-300"
+                : "border-border"
             )}
           >
             {sort === item && (
@@ -261,7 +261,7 @@ return (
             No startups match your search.
           </div>
         ) : (
-          <ul className="grid gap-6 lg:grid-cols-2">
+          <ul className="grid gap-5 sm:gap-6 xl:grid-cols-2">
            {list.map((s) => {
   const up = upvoted.has(s.slug);
 
@@ -273,16 +273,15 @@ return (
   
 <div className="mb-4 mt-2">
   <div className="flex justify-end">
-    <span className="inline-flex items-center gap-1 rounded-full bg-purple-100 px-3 py-1 text-[11px] font-bold text-purple-700">
+    <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary">
       <Crown className="size-3.5" />
     Recommended
     </span>
   </div>
 </div>
 {/* TOP ROW */}
-<div className="flex items-start justify-between gap-4">
-  <div className="flex min-w-0 items-start gap-4">
-    
+<div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+<div className="flex min-w-0 items-start gap-3 sm:gap-4">    
     <Link
       href={`/startup/${s.slug}`}
 className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-border bg-muted shadow-sm"    >
@@ -323,8 +322,7 @@ className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-bor
     }}
     className={cn(
   buttonVariants({ variant: "outline" }),
-  "h-8 shrink-0 rounded-xl px-2 text-xs font-semibold border-primary text-primary hover:bg-primary/10"
-
+"h-9 w-full shrink-0 rounded-xl border-primary px-3 text-xs font-semibold text-primary hover:bg-primary/10 sm:w-auto"
 )}
   >
     Enquire
@@ -340,8 +338,7 @@ className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-bor
   {(s.topics ?? []).slice(0, 6).map((t) => (
     <span
       key={t}
-      className="rounded-full border border-slate-300 bg-slate-100 px-4 py-1.5 text-xs font-medium text-slate-700"
-    >
+className="rounded-full border border-border bg-muted px-4 py-1.5 text-xs font-medium text-muted-foreground"    >
       {t}
     </span>
   ))}
@@ -388,7 +385,7 @@ className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-bor
 {/* ENQUIRY MODAL */}
 {showEnquiryModal && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-    <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+    <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-2xl">
       {/* HEADER */}
       <div className="flex items-center justify-between">
         <h3 className="text-xl font-bold">
@@ -402,16 +399,17 @@ className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-bor
             setEmailError("");
             setSuccessMessage("");
           }}
-          className="text-2xl text-slate-400 hover:text-slate-700"
+          className="text-2xl text-muted-foreground hover:text-foreground"
         >
           ×
         </button>
       </div>
 
       {/* DESCRIPTION */}
-      <p className="mt-2 text-sm text-slate-500">
+ <p className="mt-2 text-sm text-muted-foreground">
+
         Enter your email address and we'll connect you with{" "}
-        <span className="font-semibold text-slate-900">
+        <span className="font-semibold text-foreground">
           {selectedStartup}
         </span>.
       </p>
@@ -422,8 +420,7 @@ className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-bor
         placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="mt-5 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-purple-500"
-      />
+className="mt-5 w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"      />
 
       {/* ERROR */}
       {emailError && (

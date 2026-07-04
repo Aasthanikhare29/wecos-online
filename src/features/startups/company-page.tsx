@@ -212,13 +212,13 @@ const profileTabs = [
 const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) => (
   <div
     className={cn(
-      "rounded-2xl border border-slate-100 bg-white p-5 shadow-sm",
+      "rounded-2xl border border-border bg-card p-5 shadow-sm",
       tall && "h-full"
     )}
   >
     <div className="flex items-start justify-between gap-3">
       <div>
-        <p className="font-semibold text-slate-900">{r.client}</p>
+        <p className="font-semibold text-foreground">{r.client}</p>
         <p className="text-xs text-muted-foreground">{r.company}</p>
       </div>
 
@@ -227,7 +227,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
       </div>
     </div>
 
-    <p className="mt-4 text-sm leading-relaxed text-slate-700">
+    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
       “{r.review}”
     </p>
 
@@ -235,8 +235,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
       <button
         type="button"
         onClick={() => setActiveVideo(r.video!)}
-        className="group relative mt-4 w-full overflow-hidden rounded-xl border border-slate-200"
-      >
+className="group relative mt-4 w-full overflow-hidden rounded-xl border border-border"      >
         <img
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThCsvF6g3mCW4f3yk6h8fo0OVC1_1GkjOoZgnBuWGlnA&s=10"
           alt={`${r.client} testimonial`}
@@ -244,7 +243,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
         />
 
         <span className="absolute inset-0 grid place-items-center bg-black/30">
-          <span className="grid size-14 place-items-center rounded-full bg-white text-purple-600 shadow-lg">
+          <span className="grid size-14 place-items-center rounded-full bg-card  text-purple-600 shadow-lg">
             <Play className="size-6 fill-purple-600" />
           </span>
         </span>
@@ -256,8 +255,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
         <button
           type="button"
           onClick={() => setActiveVideo(r.verticalVideo!)}
-          className="group relative w-[180px] overflow-hidden rounded-2xl border border-slate-200"
-        >
+className="group relative w-[180px] overflow-hidden rounded-2xl border border-border"        >
           <img
             src="https://img.youtube.com/vi/9gmhdP82l3k/maxresdefault.jpg"
             alt={`${r.client} short testimonial`}
@@ -265,7 +263,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
           />
 
           <span className="absolute inset-0 grid place-items-center bg-black/30">
-            <span className="grid size-12 place-items-center rounded-full bg-white text-purple-600 shadow-lg">
+            <span className="grid size-12 place-items-center rounded-full bg-card  text-purple-600 shadow-lg">
               <Play className="size-5 fill-purple-600" />
             </span>
           </span>
@@ -277,15 +275,15 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 
 
   return (
-<div className="mx-auto max-w-7xl bg-[#f8f7f2] px-4 py-6 sm:px-6 lg:px-8">
+<div className="mx-auto max-w-7xl bg-background text-foreground px-4 py-6 sm:px-6 lg:px-8">
 <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-4">
       {/* Header */}
-      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+      <section className="overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
   <div className="relative z-10 ">
   <div className="flex flex-col gap-6 md:flex-row md:items-start">
 
-   <div className="grid size-25 place-items-center rounded-full border-4 border-white bg-white shadow-lg">
+   <div className="grid size-25 place-items-center rounded-full border-4 border-background bg-card shadow-lg">
   {data.logoUrl ? (
     <img
       src={data.logoUrl}
@@ -293,8 +291,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
       className="h-full w-full rounded-full object-cover"
     />
   ) : (
-    <span className="text-2xl font-bold tracking-widest text-slate-900">
-      {data.logoText}
+<span className="text-2xl font-bold tracking-widest text-foreground">
+        {data.logoText}
     </span>
   )}
 </div>
@@ -310,7 +308,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
           ) : null}
         </div>
 
-        <div className="mt-4 inline-flex rounded-lg bg-slate-100 px-4 py-2 text-sm text-slate-700">
+        <div className="mt-4 inline-flex rounded-lg bg-muted px-4 py-2 text-sm text-muted-foreground">
           Industry: {data.overview.industry}
         </div>
       </div>
@@ -319,9 +317,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
     <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 <button
   onClick={() => setShowEnquiryModal(true)}
-  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-violet-500 px-8 py-3 text-sm font-semibold text-white shadow-lg sm:w-auto"
->
-  <Rocket className="size-4" />
+className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-violet-500 px-8 py-3 text-sm font-semibold text-white shadow-lg sm:w-auto">
+    <Rocket className="size-4" />
   Enquire Now
 </button>
 
@@ -329,8 +326,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   href="https://www.bookasloth.com"
   target="_blank"
   rel="noopener noreferrer"
-  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-900 backdrop-blur transition hover:bg-white/20 sm:w-auto"
->
+className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-background px-8 py-3 text-sm font-semibold text-foreground transition hover:bg-muted sm:w-auto">
   <CalendarDays className="size-4" />
   Book a Meeting
 </a>
@@ -380,13 +376,13 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
             </Card>
           )}
 <Card className="overflow-hidden">
-  <div className="flex overflow-x-auto border-b border-slate-200">
+<div className="flex overflow-x-auto border-b border-border">
     {profileTabs.map((tab) => (
       <button
         key={tab.id}
         onClick={() => setActiveSection(tab.id)}
         className={cn(
-          "whitespace-nowrap px-6 py-4 text-sm font-semibold text-slate-500 transition",
+          "whitespace-nowrap px-6 py-4 text-sm font-semibold text-muted-foreground transition",
           activeSection === tab.id &&
             "border-b-2 border-purple-600 text-purple-600"
         )}
@@ -407,20 +403,20 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
             return (
               <div
                 key={p.name}
-                className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-all duration-300 hover:-hover:border-purple-200"
+                className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:-hover:border-purple-200"
               >
                 <div className="absolute " />
 
                 <div className="mb-5 flex items-start justify-between gap-6">
   <div>
-    <h3 className="text-lg font-bold text-slate-900">
+    <h3 className="text-lg font-bold text-foreground">
       {p.name}
     </h3>
   </div>
 </div>
 
                 {p.description && (
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
                     {p.description}
                   </p>
                 )}
@@ -447,10 +443,10 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 
     {activeSection === "team" && show.people && (
   <div>
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <div>
         <h2 className="text-lg font-bold">Our Team</h2>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-muted-foreground">
           Meet the leaders behind our success.
         </p>
       </div>
@@ -478,8 +474,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
               overflow-hidden
               rounded-2xl
               border
-              border-slate-100
-              bg-white
+              border-border
+              bg-card
               p-5
               text-center
               shadow-sm
@@ -490,8 +486,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
           >
             <div className="absolute" />
 
-            <div className="mx-auto h-20 w-20 overflow-hidden rounded-full border-4 border-white shadow-md">
-  {m.image ? (
+<div className="mx-auto h-20 w-20 overflow-hidden rounded-full border-4 border-background shadow-md">
+    {m.image ? (
     <img
       src={m.image}
       alt={m.name}
@@ -509,15 +505,15 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   )}
 </div>
 
-            <h3 className="mt-4 text-base font-bold text-slate-900">
+            <h3 className="mt-4 text-base font-bold text-foreground">
               {m.name}
             </h3>
 
-            <p className="mt-1 min-h-[40px] text-sm leading-5 text-slate-500">
+            <p className="mt-1 min-h-[40px] text-sm leading-5 text-muted-foreground">
               {m.role}
             </p>
             {m.bio && (
-  <p className=" min-h-[48px] text-xs leading-5 text-slate-500">
+  <p className=" min-h-[48px] text-xs leading-5 text-muted-foreground">
     {m.bio}
   </p>
 )}
@@ -532,7 +528,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 
   <a
     href="#"
-    className="grid size-9 place-items-center rounded-lg bg-slate-100 text-black transition hover:scale-110"
+    className="grid size-9 place-items-center rounded-lg bg-muted text-foreground transition hover:scale-110"
   >
     <FaXTwitter className="text-sm" />
   </a>
@@ -600,8 +596,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
               group
               rounded-2xl
               border
-              border-slate-100
-              bg-white
+              border-border
+              bg-card
               p-5
               text-center
               shadow-sm
@@ -618,8 +614,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   />
 </div>
 
-            <p className="font-bold text-slate-900">
-              {client.name}
+<p className="font-bold text-foreground">
+                {client.name}
             </p>
           </div>
         );
@@ -650,18 +646,18 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 ].map(({ icon: Icon, value, label }) => (
   <div
     key={label}
-    className="flex items-start gap-3 rounded-xl border border-slate-100 bg-white p-4"
+    className="flex items-start gap-3 rounded-xl border border-border bg-card p-4"
 >
 <div className="mt-1 grid size-10 shrink-0 place-items-center rounded-lg bg-purple-600 text-white">
       <Icon className="size-5" />
     </div>
 
     <div className="flex min-w-0 flex-col">
-      <p className="text-2xl font-bold leading-none text-slate-900">
+      <p className="text-2xl font-bold leading-none text-foreground">
         {value}
       </p>
 
-      <p className="mt-1 whitespace-nowrap text-sm leading-tight text-slate-500">
+      <p className="mt-1 whitespace-nowrap text-sm leading-tight text-muted-foreground">
   {label}
 </p>
     </div>
@@ -698,8 +694,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
           {data.jobs!.map((j, i) => (
             <li
               key={i}
-              className="flex items-center justify-between gap-3 py-3 first:pt-0"
-            >
+className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:justify-between"            >
               <div>
                 <p className="text-sm font-medium">{j.title}</p>
                 <p className="text-xs text-muted-foreground">
@@ -722,7 +717,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 </Card>      
 {/*Documents */}
 <Card className="p-5 sm:p-6">
-  <div className="flex items-center justify-between">
+  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
     <div>
       <h2 className="text-lg font-bold">Documents</h2>
       <p className="mt-1 text-sm text-muted-foreground">
@@ -765,8 +760,8 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
           group
           rounded-2xl
           border
-          border-slate-100
-          bg-white
+          border-border
+          bg-card
           p-4
           shadow-sm
           transition-all
@@ -793,17 +788,17 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
     setShowEnquiryModal(true);
   }}
 >
-  <Download className="size-4 text-slate-400 transition group-hover:text-purple-600" />
+  <Download className="size-4 text-muted-foreground transition group-hover:text-purple-600" />
 </button>
         </div>
 
         {/* title */}
-        <p className="font-semibold text-slate-900">
+        <p className="font-semibold text-foreground">
           {doc.name}
         </p>
 
         {/* type */}
-        <p className="mt-1 text-xs text-slate-500">
+        <p className="mt-1 text-xs text-muted-foreground">
           PDF Document
         </p>
 
@@ -850,7 +845,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
         Favorite Company
       </h3>
 
-      <p className="mt-1 text-xs text-slate-500">
+      <p className="mt-1 text-xs text-muted-foreground">
         Add to your favorites
       </p>
     </div>
@@ -918,7 +913,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
           "grid size-11 place-items-center rounded-full transition-all duration-300",
           isFavorite
             ? "bg-red-50 scale-110"
-            : "bg-slate-100 hover:bg-red-50"
+            : "bg-muted hover:bg-red-50"
         )}
       >
         <Heart
@@ -927,7 +922,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   animateHeart && "animate-heart",
             isFavorite
               ? "fill-red-500 text-red-500 scale-125"
-              : "text-slate-500"
+              : "text-muted-foreground"
           )}
         />
       </div>
@@ -939,7 +934,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 
     <div className="mt-5 space-y-5 text-sm">
   <div className="flex gap-3">
-    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-slate-100  text-purple-600">
+    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted  text-purple-600">
       <CalendarDays className="size-5" />
     </div>
 
@@ -952,7 +947,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   </div>
 
   <div className="flex gap-3">
-    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-slate-100  text-purple-600">
+    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted  text-purple-600">
       <MapPin className="size-5" />
     </div>
 
@@ -965,7 +960,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   </div>
 
   <div className="flex gap-3">
-    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-slate-100  text-purple-600">
+    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted text-purple-600">
       <Building2 className="size-5" />
     </div>
 
@@ -978,7 +973,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   </div>
 
   <div className="flex gap-3">
-    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-slate-100  text-purple-600">
+    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted  text-purple-600">
       <ExternalLink className="size-5" />
     </div>
 
@@ -995,7 +990,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
     </div>
   </div>
   <div className="mt-6 border-t pt-5">
-  <p className="mb-3 text-sm font-semibold text-slate-900">
+ <p className="mb-3 text-sm font-semibold text-foreground">
     Social Presence
   </p>
 
@@ -1023,7 +1018,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 
     <a
       href="#"
-      className="grid size-10 place-items-center rounded-xl bg-slate-100 text-black transition hover:scale-105"
+      className="grid size-10 place-items-center rounded-xl bg-muted text-foreground transition hover:scale-105"
     >
       <FaXTwitter className="text-base" />
     </a>
@@ -1057,7 +1052,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
       Contact Us
     </button>
   </Card>
-  <Card className="rounded-2xl border border-purple-100 bg-white p-4 shadow-sm">
+  <Card className="rounded-2xl border border-border bg-card p-4 shadow-sm">
   <h3 className="mb-4 text-base font-bold">
     WeCos Trust Indicators
   </h3>
@@ -1133,12 +1128,12 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   <Icon className="size-4" />
 </div>
 
-          <span className="truncate text-xs text-slate-700">
+          <span className="truncate text-xs text-muted-foreground">
             {label}
           </span>
         </div>
 
-        <span className="ml-2 shrink-0 text-xs font-semibold text-slate-900">
+        <span className="ml-2 shrink-0 text-xs font-semibold text-foreground">
           {value}
         </span>
       </div>
@@ -1149,21 +1144,21 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
 </aside>
 {showEnquiryModal && (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-    <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
-      <div className="flex items-center justify-between">
+<div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-2xl sm:p-6">
+        <div className="flex items-center justify-between">
         <h3 className="text-xl font-bold">
           Send Enquiry
         </h3>
 
         <button
           onClick={() => setShowEnquiryModal(false)}
-          className="text-2xl text-slate-400 hover:text-slate-700"
+          className="text-2xl text-muted-foreground hover:text-foreground"
         >
           ×
         </button>
       </div>
 
-      <p className="mt-2 text-sm text-slate-500">
+      <p className="mt-2 text-sm text-muted-foreground">
         {selectedDocument
   ? `Enter your email address to download ${selectedDocument}.`
   : `Enter your email address and we'll connect you with ${data.name}.`}
@@ -1174,8 +1169,7 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
   placeholder="Enter your email"
   value={email}
   onChange={(e) => setEmail(e.target.value)}
-  className="mt-5 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-purple-500"
-/>
+className="mt-5 w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"/>
 
 {emailError && (
   <p className="mt-2 text-sm font-medium text-red-600">
@@ -1255,7 +1249,7 @@ onClick={async () => {
   }
 }}
 
-          className="flex-1 rounded-xl bg-purple-600 py-3 font-medium text-white"
+          className="flex-1 rounded-xl bg-primary py-3 font-medium text-primary-foreground"
         >
           Submit
         </button>
