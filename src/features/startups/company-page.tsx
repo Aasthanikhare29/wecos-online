@@ -275,14 +275,13 @@ className="group relative w-[180px] overflow-hidden rounded-2xl border border-bo
 
 
   return (
-<div className="mx-auto max-w-7xl bg-background text-foreground px-4 py-6 sm:px-6 lg:px-8">
+<div className="mx-auto w-full max-w-7xl overflow-hidden bg-background px-4 py-6 text-foreground sm:px-6 lg:px-8">
 <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
       {/* Header */}
-      <section className="overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
-  <div className="relative z-10 ">
-  <div className="flex flex-col gap-6 md:flex-row md:items-start">
-
+<section className="w-full overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-8">
+    <div className="relative z-10 ">
+<div className="flex min-w-0 flex-col gap-6 md:flex-row md:items-start">
    <div className="grid size-25 place-items-center rounded-full border-4 border-background bg-card shadow-lg">
   {data.logoUrl ? (
     <img
@@ -297,20 +296,19 @@ className="group relative w-[180px] overflow-hidden rounded-2xl border border-bo
   )}
 </div>
 
-      <div>
+      <div className="min-w-0">
         <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
           <h1 className="text-2xl font-bold sm:text-3xl">{data.name}</h1>
           {data.verified ? (
-            <span className="inline-flex items-center gap-2 rounded-full bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700">
-              <BadgeCheck className="size-4" />
+<span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">              <BadgeCheck className="size-4" />
               Verified Business
             </span>
           ) : null}
         </div>
 
-        <div className="mt-4 inline-flex rounded-lg bg-muted px-4 py-2 text-sm text-muted-foreground">
-          Industry: {data.overview.industry}
-        </div>
+        <div className="mt-4 w-full max-w-full rounded-lg bg-muted px-4 py-2 text-sm text-muted-foreground break-words sm:inline-flex sm:w-auto">
+  Industry: {data.overview.industry}
+</div>
       </div>
     </div>
 
@@ -343,7 +341,7 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
   <p
     ref={aboutRef}
     className={cn(
-      "mt-3 text-sm leading-relaxed whitespace-pre-line text-foreground/90",
+      "mt-3 break-words text-sm leading-relaxed whitespace-pre-line text-foreground/90",
       !showFullAbout && "line-clamp-9"
     )}
   >
@@ -837,7 +835,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
         </div>
 
         {/* Right rail (persistent) */}
-        <aside className="space-y-5 lg:sticky lg:top-6">
+        <aside className="min-w-0 space-y-5 lg:sticky lg:top-6">
           <Card className="overflow-hidden p-4">
   <div className="flex items-center justify-between">
     <div>
@@ -1116,8 +1114,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
 ].map(({ label, value, icon: Icon, color }) => (
       <div
         key={label}
-        className="flex items-center justify-between py-1"
-      >
+className="flex min-w-0 items-center justify-between gap-3 py-1"      >
         <div className="flex min-w-0 items-center gap-2">
           <div
   className={cn(
@@ -1128,7 +1125,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
   <Icon className="size-4" />
 </div>
 
-          <span className="truncate text-xs text-muted-foreground">
+          <span className="min-w-0 truncate text-xs text-muted-foreground">
             {label}
           </span>
         </div>
