@@ -59,6 +59,11 @@ const steps = [
     body: "Join your city's Coffee Club — meet other founders offline, find partners and stay consistent with community accountability.",
   },
 ];
+const stepImages = [
+    "/validate.png",
+    "/build.png",
+  "/belong.png",
+];
 
 const benefits = [
   "Startup Validation Report — AI + mentor feedback in 48 hours",
@@ -101,92 +106,171 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] bg-[radial-gradient(60%_60%_at_50%_0%,color-mix(in_oklch,var(--primary)_16%,transparent),transparent)]"
-        />
-        <Container className="py-20 text-center sm:py-28">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
-            <Sparkles className="size-3.5 text-primary" />
-            Limited to the first {pricing.foundingSeats} founding members
-          </span>
-
-          <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-extrabold tracking-tight text-balance sm:text-5xl md:text-6xl">
-            Build Better. Prove Faster. Grow Calmer.
-            <span className="mt-2 block text-primary">
-              With India's Ultimate Startup Engine.
+        <Container className="grid gap-12 py-5 text-center sm:py-8 lg:grid-cols-2 lg:items-center lg:gap-8">
+          <div className="text-left">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur">
+              <Sparkles className="size-3.5 text-primary" />
+              Limited to the first {pricing.foundingSeats} founding members
             </span>
-          </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-pretty text-muted-foreground">
-            WeCos helps founders turn ideas into real, validated startups —
-            powered by AI systems and guided by human mentors.
-          </p>
+            <h1 className="mt-6 max-w-5xl text-4xl font-extrabold tracking-tight text-balance sm:text-6xl">
+              Build Better. Prove Faster.
+              <span className="block text-primary">Grow Calmer.</span>
+            </h1>
 
-          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href="/sign-up"
-              className={cn(buttonVariants({ variant: "default" }), "h-12 px-7 text-base")}
-            >
-              I Have an Idea
-              <ArrowRight className="size-4" />
-            </Link>
-            <Link
-              href="/membership"
-              className={cn(buttonVariants({ variant: "outline" }), "h-12 px-7 text-base")}
-            >
-              I Already Have a Startup
-            </Link>
+            <p className="mt-4 text-xl font-semibold text-foreground">
+              With India&apos;s Ultimate Startup Engine.
+            </p>
+
+            <p className="mt-6 max-w-2xl text-lg text-pretty text-muted-foreground">
+              WeCos helps founders turn ideas into real, validated startups —
+              powered by AI systems and guided by human mentors.
+            </p>
+
+            <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <Link
+                href="/sign-up"
+                className={cn(
+                  buttonVariants({ variant: "default" }),
+                  "h-12 w-full px-7 text-base sm:w-auto"
+                )}
+              >
+                I Have an Idea
+                <ArrowRight className="size-4" />
+              </Link>
+
+              <Link
+                href="/membership"
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "h-12 w-full px-7 text-base sm:w-auto"
+                )}
+              >
+                I Already Have a Startup
+              </Link>
+            </div>
+
+            <p className="mt-6 text-sm text-muted-foreground">
+              Join 500+ founders building calmly — one clear step at a time.
+            </p>
           </div>
 
-          <p className="mt-6 text-sm text-muted-foreground">
-            Join 500+ founders building calmly — one clear step at a time.
-          </p>
+          <div className="relative flex items-center justify-center">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_60%_at_50%_50%,color-mix(in_oklch,var(--primary)_16%,transparent),transparent)]"
+            />
+
+            <img
+              src="/hero-img.png"
+              alt="WeCos startup community"
+              className="w-full max-w-md sm:max-w-xl lg:max-w-3xl xl:max-w-4xl object-contain"
+            />
+          </div>
         </Container>
       </section>
 
       {/* Why founders choose WeCos */}
-      <section className="border-t border-border/60 py-20 sm:py-24">
+      <section className="border-t border-border/60 py-16 sm:py-20">
         <Container>
           <SectionHeading
             eyebrow="Why WeCos"
             title="We don't build in chaos. We build with clarity."
             subtitle="Modern founders juggle 20 tools, dozens of opinions and endless noise. WeCos brings everything together — one calm engine for real progress."
           />
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {problems.map(({ icon: Icon, problem, solution }) => (
-              <div
-                key={problem}
-                className="group rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/30"
-              >
-                <div className="grid size-11 place-items-center rounded-xl bg-accent text-accent-foreground">
-                  <Icon className="size-5" />
+
+          <div className="mt-12 space-y-6">
+            {/* First row: 3 cards */}
+            <div className="grid gap-6 lg:grid-cols-3">
+              {problems.slice(0, 3).map(({ icon: Icon, problem, solution }, index) => (
+                <div
+                  key={problem}
+                  className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-border bg-card px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
+                >
+                  <span className="absolute right-6 top-5 text-4xl font-extrabold text-muted-foreground/20 transition-colors group-hover:text-primary/20">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <div className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary">
+                    <Icon className="size-5" />
+                  </div>
+
+                  <h3 className="mt-4 text-lg font-bold tracking-tight text-foreground">
+                    {problem}
+                  </h3>
+                  <p className="mt-2 max-w-sm text-sm leading-7 text-muted-foreground">
+                    {solution}
+                  </p>
                 </div>
-                <h3 className="mt-5 text-lg font-semibold">{problem}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  {solution}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Second row: 2 centered cards */}
+            <div className="grid gap-6 lg:mx-auto lg:max-w-[760px] lg:grid-cols-2">
+              {problems.slice(3).map(({ icon: Icon, problem, solution }, index) => (
+                <div
+                  key={problem}
+                  className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-border bg-card px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
+                >
+                  <span className="absolute right-6 top-5 text-5xl font-extrabold text-muted-foreground/20 transition-colors group-hover:text-primary/20">
+                    {String(index + 4).padStart(2, "0")}
+                  </span>
+
+                  <div className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary">
+                    <Icon className="size-5" />
+                  </div>
+
+                  <h3 className="mt-4 text-xl font-bold tracking-tight text-foreground">
+                    {problem}
+                  </h3>
+
+                  <p className="mt-2 max-w-sm text-base leading-relaxed text-muted-foreground">
+                    {solution}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
 
       {/* How it works */}
-      <section className="border-t border-border/60 bg-muted/30 py-20 sm:py-24">
+      <section className="border-t border-border/60 bg-background py-20 sm:py-24">
         <Container>
-          <SectionHeading
-            eyebrow="How it works"
-            title="Three calm steps from idea to momentum."
-          />
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-bold uppercase tracking-wide text-primary">
+              How it works
+            </p>
+
+            <h2 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl">
+              Three calm steps from <br className="hidden sm:block" />
+              idea to momentum.
+            </h2>
+          </div>
+
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {steps.map((step, i) => (
-              <div key={step.title} className="relative rounded-2xl border border-border bg-card p-7">
-                <span className="font-mono text-sm font-semibold text-primary">
+              <div
+                key={step.title}
+                className="group rounded-[24px] border border-border bg-card p-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(124,58,237,0.12)]"
+              >
+                <span className="font-mono text-xl font-bold text-primary">
                   0{i + 1}
                 </span>
-                <h3 className="mt-3 text-xl font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+
+                <div className="mt-4 flex justify-center">
+                  <img
+                    src={stepImages[i]}
+                    alt={step.title}
+                    className="h-[180px] w-[180px] object-contain"
+                  />
+                </div>
+
+                <h3 className="mt-4 text-xl font-bold tracking-tight text-foreground">
+                  {step.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">
                   {step.body}
                 </p>
               </div>
@@ -198,39 +282,54 @@ export default function HomePage() {
       {/* Membership */}
       <section className="border-t border-border/60 py-20 sm:py-24">
         <Container>
-          <div className="mx-auto max-w-2xl overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
-            <div className="border-b border-border bg-accent/40 p-8 text-center">
-              <p className="text-sm font-semibold tracking-wide text-primary uppercase">
-                The Membership
-              </p>
-              <div className="mt-3 flex items-end justify-center gap-1">
-                <span className="text-5xl font-extrabold tracking-tight">
-                  {inr(pricing.membershipInr)}
-                </span>
-                <span className="pb-1.5 text-muted-foreground">/year</span>
+          <div className="mx-auto max-w-xl overflow-hidden rounded-3xl border border-border bg-card shadow-[0_24px_70px_rgba(124,58,237,0.12)]">
+            <div className="relative overflow-hidden border-b border-border bg-gradient-to-b from-primary/10 to-card p-8 text-center">
+              <div className="absolute left-1/2 top-6 h-36 w-36 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+
+              <div className="relative z-10">
+                <p className="flex items-center justify-center gap-1.5 text-sm font-bold tracking-wide text-primary uppercase">
+                  <Sparkles className="size-4" />
+                  The Membership
+                </p>
+
+                <div className="mt-3 flex items-end justify-center gap-1">
+                  <span className="text-5xl font-extrabold tracking-tight text-foreground">
+                    {inr(pricing.membershipInr)}
+                  </span>
+                  <span className="pb-1.5 text-primary">/year</span>
+                </div>
+
+                <p className="mt-2 text-sm text-muted-foreground">
+                  One year of clarity, structure and belonging — about{" "}
+                  <span className="font-semibold text-primary">
+                    {inr(pricing.perDayInr)}/day.
+                  </span>
+                </p>
               </div>
-              <p className="mt-2 text-sm text-muted-foreground">
-                One year of clarity, structure and belonging — about{" "}
-                {inr(pricing.perDayInr)}/day.
-              </p>
             </div>
+
             <div className="p-8">
               <ul className="grid gap-3">
                 {benefits.map((b) => (
                   <li key={b} className="flex items-start gap-3 text-sm">
-                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-success/15 text-success">
+                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
                       <Check className="size-3.5" />
                     </span>
                     <span className="text-foreground/90">{b}</span>
                   </li>
                 ))}
               </ul>
+
               <Link
                 href="/membership"
-                className={cn(buttonVariants({ variant: "default" }), "mt-8 h-12 w-full text-base")}
+                className={cn(
+                  buttonVariants({ variant: "default" }),
+                  "mt-8 h-12 w-full bg-primary text-base text-primary-foreground shadow-[0_14px_30px_rgba(124,58,237,0.25)] hover:bg-primary/90",
+                )}
               >
                 Join the Founding {pricing.foundingSeats} — {inr(pricing.membershipInr)}/year
               </Link>
+
               <p className="mt-3 text-center text-xs text-muted-foreground">
                 Total value {inr(pricing.valueInr)}+. Pay once. Build calmly all year.
               </p>
@@ -271,64 +370,61 @@ export default function HomePage() {
       </section>
 
       {/* Final CTA */}
-<section className="py-20 sm:py-24">
-  <Container>
-    <div className="relative overflow-hidden rounded-3xl px-6 py-20 text-center text-white sm:px-12 bg-[linear-gradient(135deg,#3B0B96_0%,#5512D6_55%,#2B0078_100%)]">
-      
-      {/* Top-right glow */}
-      <div className="absolute -top-48 -right-40 h-[520px] w-[520px] rounded-full bg-violet-400/35 blur-[160px]" />
-
-      {/* Bottom-left glow */}
-      <div className="absolute -bottom-48 -left-40 h-[480px] w-[480px] rounded-full bg-purple-500/35 blur-[160px]" />
-
-      {/* Dot pattern */}
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)",
-          backgroundSize: "70px 70px",
-        }}
-      />
-
-      {/* Decorative circles */}
-      <div className="absolute -top-20 right-[-40px] h-60 w-60 rounded-full border border-white/10" />
-      <div className="absolute -top-10 right-[-20px] h-44 w-44 rounded-full border border-white/10" />
-
-      <div className="absolute -bottom-16 -left-16 h-52 w-52 rounded-full border border-white/10" />
-      <div className="absolute -bottom-8 -left-8 h-40 w-40 rounded-full border border-white/10" />
-
-      {/* Content */}
-      <div className="relative z-10">
-        <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-          You've got the spark.
-          <span className="block">We'll give you the engine.</span>
-        </h2>
-
-        <p className="mx-auto mt-6 max-w-xl text-lg text-white/80">
-          Get validation, clarity and community — all for {inr(pricing.membershipInr)}/year.
-        </p>
-
-        <div className="mt-9 flex justify-center">
-          <Link
-            href="/sign-up"
-            className={cn(
-              buttonVariants({ variant: "default" }),
-              "h-14 rounded-2xl border border-white/10 bg-white/15 px-10 text-base text-white backdrop-blur-xl hover:bg-white/20",
-            )}
+      <section className="py-20 sm:py-24">
+        <Container>
+          <div
+            className="relative overflow-hidden rounded-[28px] px-6 py-16 text-center text-white sm:px-12"
+            style={{
+              background:
+                "radial-gradient(circle at 0% 100%, rgba(6,182,212,0.95) 0%, rgba(6,182,212,0.45) 16%, transparent 34%), radial-gradient(circle at 100% 0%, rgba(217,70,239,0.95) 0%, rgba(217,70,239,0.45) 18%, transparent 36%), linear-gradient(135deg, #050617 0%, #08051f 45%, #16051f 100%)",
+            }}
           >
-            Start My Engine
-            <ArrowRight className="size-4" />
-          </Link>
-        </div>
+            <div className="absolute inset-0 bg-black/10" />
 
-        <p className="mt-7 text-sm text-white/70">
-          First {pricing.foundingSeats} founders get lifetime recognition on the WeCos Wall of Builders.
-        </p>
-      </div>
-    </div>
-  </Container>
-</section>
+            <div
+              className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage:
+                  "radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1px)",
+                backgroundSize: "55px 55px",
+              }}
+            />
+
+            <div className="absolute -right-24 bottom-[-95px] h-72 w-72 rounded-full border border-white/10" />
+            <div className="absolute -right-16 bottom-[-65px] h-56 w-56 rounded-full border border-white/10" />
+
+            <div className="relative z-10">
+              <h2 className="mx-auto max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+                You&apos;ve got the spark.
+                <span className="block">We&apos;ll give you the engine.</span>
+              </h2>
+
+              <p className="mx-auto mt-4 max-w-xl text-white/80">
+                Get validation, clarity and community — all for{" "}
+                {inr(pricing.membershipInr)}/year.
+              </p>
+
+              <div className="mt-8 flex justify-center">
+                <Link
+                  href="/sign-up"
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "h-12 rounded-xl bg-primary px-7 text-base text-primary-foreground shadow-[0_12px_30px_rgba(124,58,237,0.35)] hover:bg-primary/90",
+                  )}
+                >
+                  Start My Engine
+                  <ArrowRight className="size-4" />
+                </Link>
+              </div>
+
+              <p className="mt-5 text-sm text-white/70">
+                First {pricing.foundingSeats} founders get lifetime recognition on the
+                WeCos Wall of Builders.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }

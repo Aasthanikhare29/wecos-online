@@ -66,14 +66,14 @@ export type FounderProfileData = {
   alsoViewed?: { name: string; handle: string; headline: string; avatarText: string }[];
 };
 const OPEN_TO_COLORS = [
-  "border-green-200 bg-green-50 text-green-700",
-  "border-purple-200 bg-purple-50 text-purple-700",
-  "border-blue-200 bg-blue-50 text-blue-700",
-  "border-orange-200 bg-orange-50 text-orange-700",
-  "border-pink-200 bg-pink-50 text-pink-700",
-  "border-cyan-200 bg-cyan-50 text-cyan-700",
-  "border-yellow-200 bg-yellow-50 text-yellow-700",
-  "border-red-200 bg-red-50 text-red-700",
+  "border-success/20 bg-success/10 text-success",
+  "border-primary/20 bg-primary/10 text-primary",
+  "border-info/20 bg-info/10 text-info",
+  "border-orange-500/20 bg-orange-500/10 text-orange-500",
+  "border-pink-500/20 bg-pink-500/10 text-pink-500",
+  "border-cyan-500/20 bg-cyan-500/10 text-cyan-500",
+  "border-warning/20 bg-warning/10 text-warning",
+  "border-destructive/20 bg-destructive/10 text-destructive",
 ];
 const compact = (n?: number) =>
   n == null
@@ -84,7 +84,7 @@ function Card({ children, className }: { children: React.ReactNode; className?: 
   return (
     <div
       className={cn(
-        "rounded-2xl border border-slate-200 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.06)]",
+        "rounded-2xl border border-border bg-card shadow-[0_8px_30px_rgba(15,23,42,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.3)]",
         className,
       )}
     >
@@ -108,7 +108,7 @@ function LogoTile({ text, className }: { text: string; className?: string }) {
 
 export function FounderProfile({ data }: { data: FounderProfileData }) {
   return (
-    <div className="grid gap-4 lg:grid-cols-[1fr_320px]">
+    <div className="grid gap-4 lg:grid-cols-[1fr_320px] items-start">
       <div className="space-y-4">
         {/* Header */}
 <Card className="overflow-hidden shadow-sm">
@@ -196,21 +196,6 @@ export function FounderProfile({ data }: { data: FounderProfileData }) {
         </p>
       )}
     </div>
-
-    <div className="mt-4 grid grid-cols-5 overflow-hidden rounded-xl border border-slate-200 bg-white">
-      {[
-        ["200M+", "Followers"],
-        ["6", "Startups"],
-        ["$44B+", "Funding"],
-        ["2", "Exits"],
-        ["98", "Score"],
-      ].map(([value, label]) => (
-        <div key={label} className="border-r px-2 py-2 text-center last:border-r-0">
-          <p className="text-sm font-bold">{value}</p>
-          <p className="text-[10px] text-muted-foreground">{label}</p>
-        </div>
-      ))}
-    </div>
   </div>
 </Card>
 
@@ -279,7 +264,7 @@ export function FounderProfile({ data }: { data: FounderProfileData }) {
                 {p.text}
               </p>
 
-              <div className="mt-2 flex items-center gap-4 text-[11px] text-slate-500">
+              <div className="mt-2 flex items-center gap-4 text-[11px] text-muted-foreground">
                 <span className="inline-flex items-center gap-1">
                   <ThumbsUp className="size-3" />
                   {compact(p.likes)}
@@ -365,7 +350,7 @@ export function FounderProfile({ data }: { data: FounderProfileData }) {
       </div>
 
       {/* Right rail */}
-      <aside className="space-y-4">
+      <aside className="sticky top-24 space-y-4">
         {data.currentCompany ? (
   <Card className="p-4">
     <p className="text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">
@@ -432,7 +417,7 @@ export function FounderProfile({ data }: { data: FounderProfileData }) {
 
        {data.alsoViewed?.length ? (
   <Card className="p-4">
-    <p className="text-sm font-semibold">People also viewed</p>
+    <p className="text-sm font-semibold">People you may know</p>
     <ul className="mt-3 space-y-2">
       {data.alsoViewed.map((p) => (
         <li key={p.handle} className="flex items-start gap-2">
@@ -456,26 +441,26 @@ export function FounderProfile({ data }: { data: FounderProfileData }) {
       {
         icon: Trophy,
         title: "Time Person of the Year 2021",
-        bg: "bg-yellow-50",
-        color: "text-yellow-600",
+        bg: "bg-warning/10",
+        color: "text-warning",
       },
       {
         icon: Rocket,
         title: "First private company to reach orbit",
-        bg: "bg-green-50",
-        color: "text-green-600",
+        bg: "bg-success/10",
+        color: "text-success",
       },
       {
         icon: DollarSign,
         title: "Forbes Real Time Billionaires",
-        bg: "bg-blue-50",
-        color: "text-blue-600",
+        bg: "bg-info/10",
+        color: "text-info",
       },
       {
         icon: Star,
         title: "6 Unicorn Companies Built",
-        bg: "bg-purple-50",
-        color: "text-purple-600",
+        bg: "bg-primary/10",
+        color: "text-primary",
       },
     ].map(({ icon: Icon, title, bg, color }) => (
       <li key={title} className="flex items-start gap-3">
@@ -507,17 +492,17 @@ export function FounderProfile({ data }: { data: FounderProfileData }) {
           className={cn(
             "rounded-full border px-2.5 py-1 text-[11px] font-medium",
             i % 6 === 0 &&
-              "border-purple-200 bg-purple-50 text-purple-700",
+              "border-primary/20 bg-primary/10 text-primary",
             i % 6 === 1 &&
-              "border-blue-200 bg-blue-50 text-blue-700",
+              "border-info/20 bg-info/10 text-info",
             i % 6 === 2 &&
-              "border-green-200 bg-green-50 text-green-700",
+              "border-success/20 bg-success/10 text-success",
             i % 6 === 3 &&
-              "border-orange-200 bg-orange-50 text-orange-700",
+              "border-orange-500/20 bg-orange-500/10 text-orange-500",
             i % 6 === 4 &&
-              "border-pink-200 bg-pink-50 text-pink-700",
+              "border-pink-500/20 bg-pink-500/10 text-pink-500",
             i % 6 === 5 &&
-              "border-slate-200 bg-slate-50 text-slate-700"
+              "border-muted-foreground/20 bg-muted text-muted-foreground"
           )}
         >
           {s}

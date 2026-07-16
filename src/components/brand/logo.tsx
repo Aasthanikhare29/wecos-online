@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
@@ -19,10 +20,14 @@ export function Logo({
         className,
       )}
     >
-      <span className="grid size-7 place-items-center rounded-md bg-primary text-sm font-bold text-primary-foreground">
-        W
-      </span>
-      <span>{siteConfig.name}</span>
+      <Image
+        src="/logo.png"
+        alt={`${siteConfig.name} logo`}
+        width={160}
+        height={48}
+        className="h-10 w-auto"
+        priority
+      />
     </Link>
   );
 }

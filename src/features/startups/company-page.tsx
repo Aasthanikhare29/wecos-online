@@ -245,8 +245,10 @@ const ReviewCard = ({ r, tall = false }: { r: CompanyReview; tall?: boolean }) =
         <p className="text-xs text-muted-foreground">{r.company}</p>
       </div>
 
-      <div className="text-sm text-yellow-500">
-        {"★".repeat(r.rating)}
+      <div className="flex gap-0.5 text-sm text-warning">
+        {Array.from({ length: r.rating }).map((_, i) => (
+          <Star key={i} className="size-4 fill-warning text-warning" />
+        ))}
       </div>
     </div>
 
@@ -266,8 +268,8 @@ className="group relative mt-4 w-full overflow-hidden rounded-xl border border-b
         />
 
         <span className="absolute inset-0 grid place-items-center bg-black/30">
-          <span className="grid size-14 place-items-center rounded-full bg-card  text-purple-600 shadow-lg">
-            <Play className="size-6 fill-purple-600" />
+          <span className="grid size-14 place-items-center rounded-full bg-card  text-primary shadow-lg">
+            <Play className="size-6 fill-primary" />
           </span>
         </span>
       </button>
@@ -286,8 +288,8 @@ className="group relative w-[180px] overflow-hidden rounded-2xl border border-bo
           />
 
           <span className="absolute inset-0 grid place-items-center bg-black/30">
-            <span className="grid size-12 place-items-center rounded-full bg-card  text-purple-600 shadow-lg">
-              <Play className="size-5 fill-purple-600" />
+            <span className="grid size-12 place-items-center rounded-full bg-card  text-primary shadow-lg">
+              <Play className="size-5 fill-primary" />
             </span>
           </span>
         </button>
@@ -338,7 +340,7 @@ className="group relative w-[180px] overflow-hidden rounded-2xl border border-bo
     <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 <button
   onClick={() => setShowEnquiryModal(true)}
-className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-violet-500 px-8 py-3 text-sm font-semibold text-white shadow-lg sm:w-auto">
+className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground shadow-lg transition-colors hover:bg-primary/90 sm:w-auto">
     <Rocket className="size-4" />
   Enquire Now
 </button>
@@ -375,7 +377,7 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
     <button
       type="button"
       onClick={() => setShowFullAbout(!showFullAbout)}
-      className="mt-3 text-sm font-semibold text-purple-600 hover:text-purple-700"
+      className="mt-3 text-sm font-semibold text-primary hover:text-primary/80"
     >
       {showFullAbout ? "Show Less" : "Read More"}
     </button>
@@ -386,15 +388,15 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
           )}
 
 <Card className="overflow-hidden">
-      <div className="flex items-center justify-center gap-6 border-b border-border px-6">
+      <div className="flex items-center justify-center gap-4 overflow-x-auto border-b border-border px-4 sm:gap-6 sm:px-6 scrollbar-hide">
         {profileTabs.map((tab) => (
       <button
         key={tab.id}
         onClick={() => setActiveSection(tab.id)}
         className={cn(
- "relative whitespace-nowrap px-3 py-5 text-sm font-semibold text-muted-foreground transition hover:text-purple-600",
+ "relative whitespace-nowrap px-3 py-5 text-sm font-semibold text-muted-foreground transition hover:text-primary",
           activeSection === tab.id &&
-            "text-purple-600 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-purple-600"
+            "text-primary after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-primary"
         )}
       >
         {tab.label}
@@ -413,7 +415,7 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
             return (
               <div
                 key={p.name}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:-hover:border-purple-200"
+                className="group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:-hover:border-border"
               >
                 <div className="absolute " />
 
@@ -438,7 +440,7 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
     setSelectedDocument("");
     setShowEnquiryModal(true);
   }}
-  className="flex items-center gap-1 text-sm font-semibold text-purple-600 transition group-hover:gap-2"
+  className="flex items-center gap-1 text-sm font-semibold text-primary transition group-hover:gap-2"
 >
   Enquire
   <ArrowRight className="size-4" />
@@ -467,12 +469,12 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
     <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-2">
       {data.people!.map((m, index) => {
         const colors = [
-          "from-purple-100 to-violet-50 text-purple-600",
-          "from-blue-100 to-cyan-50 text-blue-600",
-          "from-orange-100 to-yellow-50 text-orange-600",
-          "from-green-100 to-emerald-50 text-green-600",
-          "from-pink-100 to-rose-50 text-pink-600",
-          "from-indigo-100 to-violet-50 text-indigo-600",
+          "from-primary/20 to-primary/10 text-primary",
+          "from-info/20 to-info/10 text-info",
+          "from-orange-500/20 to-orange-500/10 text-orange-500",
+          "from-success/20 to-success/10 text-success",
+          "from-pink-500/20 to-pink-500/10 text-pink-500",
+          "from-brand-indigo/20 to-brand-indigo/10 text-brand-indigo",
         ];
 
         return (
@@ -492,7 +494,7 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
     transition-all
     duration-300
     min-h-[250px]
-    hover:border-purple-200
+    hover:border-primary
   "
 >
   <div className="absolute" />
@@ -561,14 +563,14 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
 
   <a
     href="#"
-    className="grid size-9 place-items-center rounded-lg bg-pink-100 text-pink-600 transition hover:scale-110"
+    className="grid size-9 place-items-center rounded-lg bg-pink-500/10 text-pink-500 transition hover:scale-110"
   >
     <FaInstagram className="text-sm" />
   </a>
 
   <a
     href="#"
-    className="grid size-9 place-items-center rounded-lg bg-blue-100 text-blue-600 transition hover:scale-110"
+    className="grid size-9 place-items-center rounded-lg bg-info/10 text-info transition hover:scale-110"
   >
     <FaFacebookF className="text-sm" />
   </a>
@@ -576,7 +578,7 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
   {/* WhatsApp */}
   <a
     href="#"
-    className="grid size-9 place-items-center rounded-lg bg-green-100 text-green-600 transition hover:scale-110"
+    className="grid size-9 place-items-center rounded-lg bg-success/10 text-success transition hover:scale-110"
   >
     <FaWhatsapp className="text-sm" />
   </a>
@@ -629,7 +631,7 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
               shadow-sm
               transition-all
               duration-300
-              hover:border-purple-200
+              hover:border-primary
             "
           >
            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center">
@@ -674,7 +676,7 @@ className="inline-flex w-full items-center justify-center gap-2 rounded-xl borde
     key={label}
     className="flex items-start gap-2 rounded-xl border border-border bg-card p-3"
 >
-<div className="mt-1 grid size-10 shrink-0 place-items-center rounded-lg bg-purple-600 text-white">
+<div className="mt-1 grid size-10 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground">
       <Icon className="size-5" />
     </div>
 
@@ -749,12 +751,12 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
     <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3">
       {data.stats!.map((s, index) => {
         const colors = [
-          "bg-purple-100 text-purple-600",
-          "bg-blue-100 text-blue-600",
-          "bg-green-100 text-green-600",
-          "bg-orange-100 text-orange-600",
-          "bg-pink-100 text-pink-600",
-          "bg-yellow-100 text-yellow-600",
+          "bg-primary/10 text-primary",
+          "bg-info/10 text-info",
+          "bg-success/10 text-success",
+          "bg-orange-500/10 text-orange-500",
+          "bg-pink-500/10 text-pink-500",
+          "bg-warning/10 text-warning",
         ];
 
         const icons = [Rocket, Users, Globe, Star, Building2, TrendingUp];
@@ -820,7 +822,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
 >
   <div className="flex items-start gap-4">
     {/* Icon */}
-    <div className="grid size-12 shrink-0 place-items-center rounded-xl bg-purple-100 text-purple-600">
+    <div className="grid size-12 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
       <MapPin className="size-6" />
     </div>
 
@@ -858,28 +860,28 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
     {[
       {
         name: "Company Profile",
-        color: "from-red-100 to-red-50",
-        text: "text-red-600",
+        color: "from-destructive/20 to-destructive/10",
+        text: "text-destructive",
       },
       {
         name: "Brochure",
-        color: "from-orange-100 to-orange-50",
-        text: "text-orange-600",
+        color: "from-orange-500/20 to-orange-500/10",
+        text: "text-orange-500",
       },
       {
         name: "Pitch Deck",
-        color: "from-yellow-100 to-yellow-50",
-        text: "text-yellow-600",
+        color: "from-warning/20 to-warning/10",
+        text: "text-warning",
       },
       {
         name: "Catalogue",
-        color: "from-blue-100 to-blue-50",
-        text: "text-blue-600",
+        color: "from-info/20 to-info/10",
+        text: "text-info",
       },
       {
         name: "Rate Card",
-        color: "from-green-100 to-green-50",
-        text: "text-green-600",
+        color: "from-success/20 to-success/10",
+        text: "text-success",
       },
     ].map((doc) => (
       <div
@@ -894,7 +896,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
           shadow-sm
           transition-all
           duration-300
-          hover:border-purple-200
+          hover:border-primary
         "
       >
         {/* top */}
@@ -916,7 +918,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
     setShowEnquiryModal(true);
   }}
 >
-  <Download className="size-4 text-muted-foreground transition group-hover:text-purple-600" />
+  <Download className="size-4 text-muted-foreground transition group-hover:text-primary" />
 </button>
         </div>
 
@@ -998,7 +1000,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
   className="heart-particle top-[-18px] left-1/2"
   style={{ "--tx": "0px", "--ty": "-40px" } as React.CSSProperties}
 >
-    <Heart className="size-3 fill-[#FF3040] text-[#FF3040]" />
+    <Heart className="size-3 fill-destructive text-destructive" />
 </span>
 
 {/* left */}
@@ -1006,7 +1008,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
   className="heart-particle left-[-22px] top-1/2"
   style={{ "--tx": "-35px", "--ty": "-10px" } as React.CSSProperties}
 >
-    <Heart className="size-3 fill-[#FF3040] text-[#FF3040]" />
+    <Heart className="size-3 fill-destructive text-destructive" />
 </span>
 
 {/* right */}
@@ -1014,7 +1016,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
   className="heart-particle right-[-22px] top-1/2"
   style={{ "--tx": "35px", "--ty": "-10px" } as React.CSSProperties}
 >
-  <Heart className="size-3 fill-[#FF3040] text-[#FF3040]" />
+  <Heart className="size-3 fill-destructive text-destructive" />
 </span>
 
 {/* bottom left */}
@@ -1022,7 +1024,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
 <span
   className="heart-particle left-[-10px] bottom-[-18px]"
   style={{ "--tx": "-25px", "--ty": "25px" } as React.CSSProperties}
->  <Heart className="size-3 fill-[#FF3040] text-[#FF3040]" />
+>  <Heart className="size-3 fill-destructive text-destructive" />
 </span>
 
 {/* bottom right */}
@@ -1030,7 +1032,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
 <span
   className="heart-particle right-[-10px] bottom-[-18px]"
   style={{ "--tx": "25px", "--ty": "25px" } as React.CSSProperties}
->  <Heart className="size-3 fill-[#FF3040] text-[#FF3040]" />
+>  <Heart className="size-3 fill-destructive text-destructive" />
 </span>
 
     
@@ -1040,8 +1042,8 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
         className={cn(
           "grid size-11 place-items-center rounded-full transition-all duration-300",
           isFavorite
-            ? "bg-red-50 scale-110"
-            : "bg-muted hover:bg-red-50"
+            ? "bg-destructive/10 scale-110"
+            : "bg-muted hover:bg-destructive/10"
         )}
       >
         <Heart
@@ -1049,7 +1051,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
   "size-5 transition-all duration-300",
   animateHeart && "animate-heart",
             isFavorite
-              ? "fill-red-500 text-red-500 scale-125"
+              ? "fill-destructive text-destructive scale-125"
               : "text-muted-foreground"
           )}
         />
@@ -1062,7 +1064,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
 
     <div className="mt-5 space-y-5 text-sm">
   <div className="flex gap-3">
-    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted  text-purple-600">
+    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted  text-primary">
       <CalendarDays className="size-5" />
     </div>
 
@@ -1075,7 +1077,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
   </div>
 
   <div className="flex gap-3">
-    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted  text-purple-600">
+    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted  text-primary">
       <MapPin className="size-5" />
     </div>
 
@@ -1088,7 +1090,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
   </div>
 
   <div className="flex gap-3">
-    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted text-purple-600">
+    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted text-primary">
       <Building2 className="size-5" />
     </div>
 
@@ -1101,7 +1103,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
   </div>
 
   <div className="flex gap-3">
-    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted  text-purple-600">
+    <div className="grid size-10 shrink-0 place-items-center rounded-full bg-muted  text-primary">
       <ExternalLink className="size-5" />
     </div>
 
@@ -1111,7 +1113,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
       <a
         href={data.website}
         target="_blank"
-        className="inline-flex items-center gap-1 text-purple-600 hover:text-purple-700"
+        className="inline-flex items-center gap-1 text-primary hover:text-primary/80"
       >
         {data.website?.replace(/^https?:\/\//, "")}
       </a>
@@ -1132,14 +1134,14 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
 
     <a
       href="#"
-      className="grid size-10 place-items-center rounded-xl bg-pink-100 text-pink-600 transition hover:scale-105"
+      className="grid size-10 place-items-center rounded-xl bg-pink-500/10 text-pink-500 transition hover:scale-105"
     >
       <FaInstagram className="text-base" />
     </a>
 
     <a
       href="#"
-      className="grid size-10 place-items-center rounded-xl bg-blue-100 text-blue-600 transition hover:scale-105"
+      className="grid size-10 place-items-center rounded-xl bg-info/10 text-info transition hover:scale-105"
     >
       <FaFacebookF className="text-base" />
     </a>
@@ -1153,7 +1155,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
 
     <a
       href="#"
-      className="grid size-10 place-items-center rounded-xl bg-red-100 text-red-600 transition hover:scale-105"
+      className="grid size-10 place-items-center rounded-xl bg-destructive/10 text-destructive transition hover:scale-105"
     >
       <FaYoutube className="text-base" />
     </a>
@@ -1172,7 +1174,7 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
       <p><b>Office Address</b><br />1 Rocket Road, Hawthorne, CA 90250</p>
     </div>
 
-    <button className="mt-6 w-full rounded-xl bg-purple-600 py-3 text-sm font-semibold text-white">
+    <button className="mt-6 w-full rounded-xl bg-primary py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90">
       Book a Meeting
     </button>
 
@@ -1189,57 +1191,57 @@ className="flex flex-col gap-3 py-3 first:pt-0 sm:flex-row sm:items-center sm:ju
     {[
   {
     label: "Verified Business",
-    value: "✓",
+    value: "Verified",
     icon: BadgeCheck,
-    color: "bg-emerald-100 text-emerald-600",
+    color: "bg-success/10 text-success",
   },
   {
     label: "KYC Verified",
-    value: "✓",
+    value: "Verified",
     icon:   ShieldCheck,
-    color: "bg-blue-100 text-blue-600",
+    color: "bg-info/10 text-info",
   },
   {
     label: "Active Since",
     value: "2024",
     icon: CalendarDays,
-    color: "bg-purple-100 text-purple-600",
+    color: "bg-primary/10 text-primary",
   },
   {
     label: "Response Time",
     value: "2h",
     icon: Clock,
-    color: "bg-orange-100 text-orange-600",
+    color: "bg-orange-500/10 text-orange-500",
   },
   {
     label: "Projects",
     value: "120+",
     icon: Rocket,
-    color: "bg-pink-100 text-pink-600",
+    color: "bg-pink-500/10 text-pink-500",
   },
   {
     label: "Repeat Rate",
     value: "85%",
     icon: Users,
-    color: "bg-indigo-100 text-indigo-600",
+    color: "bg-brand-indigo/10 text-brand-indigo",
   },
   {
     label: "On-Time",
     value: "96%",
     icon: AlarmClockCheck,
-    color: "bg-green-100 text-green-600",
+    color: "bg-success/10 text-success",
   },
   {
     label: "Rating",
     value: "4.8",
     icon: Star,
-    color: "bg-yellow-100 text-yellow-600",
+    color: "bg-warning/10 text-warning",
   },
   {
     label: "Endorsements",
     value: "120+",
     icon: Heart,
-    color: "bg-red-100 text-red-600",
+    color: "bg-destructive/10 text-destructive",
   },
 ].map(({ label, value, icon: Icon, color }) => (
       <div
@@ -1298,13 +1300,13 @@ className="flex min-w-0 items-center justify-between gap-3 py-1"      >
 className="mt-5 w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"/>
 
 {emailError && (
-  <p className="mt-2 text-sm font-medium text-red-600">
+  <p className="mt-2 text-sm font-medium text-destructive">
     {emailError}
   </p>
 )}
 
 {successMessage && (
-  <p className="mt-2 text-sm font-medium text-green-600">
+  <p className="mt-2 text-sm font-medium text-success">
     {successMessage}
   </p>
 )}

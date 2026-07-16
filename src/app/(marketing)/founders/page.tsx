@@ -100,62 +100,87 @@ export default function FoundersDirectoryPage() {
           {list.map((f) => (
             <div
               key={f.handle}
-              className="h-[380px] max-w-[360px] overflow-hidden rounded-[28px] border border-slate-200/80 bg-white shadow-[0_10px_40px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(15,23,42,0.15)]"
+              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl dark:shadow-[0_2px_10px_rgba(255,255,255,0.05)]"
             >
-              <Link href={`/u/${f.handle}`} className="block">
-                <div className="relative h-[72px] overflow-hidden bg-gradient-to-r from-slate-50 via-white to-slate-100">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(139,92,246,0.10),transparent_35%)]" />
-                </div>
+              {/* Top bar */}
+              <div className="flex h-[36px] items-center justify-between px-4">
+                <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-semibold text-primary">
+                  <svg className="size-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z" />
+                    <path d="M5 21h14" />
+                  </svg>
+                  Recommended
+                </span>
+                {f.currentCompany?.name && (
+                  <span className="truncate text-[11px] font-medium text-muted-foreground">
+                    {f.currentCompany.name}
+                  </span>
+                )}
+              </div>
 
-                <div className="-mt-8 px-5 pb-4 text-center">
-                  <div className="relative mx-auto h-20 w-20">
-                    {f.avatarUrl ? (
-                      <img
-                        src={f.avatarUrl}
-                        alt={f.name}
-                        className="h-20 w-20 rounded-full border-[4px] border-white object-cover shadow-[0_8px_30px_rgba(0,0,0,0.18)] ring-2 ring-white/60"
+              {/* Avatar */}
+              <div className="flex h-[100px] items-center justify-center">
+                {f.avatarUrl ? (
+                  <img
+                    src={f.avatarUrl}
+                    alt={f.name}
+                    className="h-24 w-24 rounded-full border-4 border-card object-cover shadow-lg"
+                  />
+                ) : (
+                  <span className="grid h-24 w-24 place-items-center rounded-full border-4 border-card bg-gradient-to-br from-violet-600 to-fuchsia-500 text-2xl font-bold text-white shadow-lg">
+                    {f.avatarText}
+                  </span>
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="flex flex-1 flex-col">
+                {/* Name + Badge */}
+                <div className="flex h-[36px] items-center justify-center gap-1.5 px-5">
+                  <h3 className="truncate text-base font-bold text-foreground">{f.name}</h3>
+                  {f.verified && (
+                    <svg className="size-4 shrink-0 text-success" viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                        clipRule="evenodd"
                       />
-                    ) : (
-                      <span className="grid h-20 w-20 place-items-center rounded-full border-[4px] border-white bg-gradient-to-br from-violet-600 to-fuchsia-500 text-xl font-bold text-white shadow-[0_8px_30px_rgba(0,0,0,0.18)] ring-2 ring-white/60">
-                        {f.avatarText}
-                      </span>
-                    )}
-
-                    <span className="absolute right-0 top-1 h-5 w-5 rounded-full border-[3px] border-white bg-cyan-400" />
-                  </div>
-
-                  <h3 className="mt-2 text-lg font-bold text-slate-950">
-                    {f.name}
-                  </h3>
-
-                  <p className="mt-2 text-base font-semibold text-slate-700">
-                    {f.currentCompany?.name ?? "WeCos"}
-                  </p>
-
-                 
-                  <div className="my-3 h-px bg-slate-200" />
-
-                  <div className="flex flex-wrap justify-center gap-2">
-                    {(f.skills ?? []).slice(0, 3).map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-5 border-t border-slate-200 pt-4">
-                    <button
-                      type="button"
-                      className="w-full rounded-xl border border-slate-200 bg-white py-2.5 text-sm font-semibold text-slate-800 transition-all hover:border-violet-300 hover:bg-violet-50 hover:text-violet-700"
-                    >
-                      + Connect
-                    </button>
-                  </div>
+                    </svg>
+                  )}
                 </div>
-              </Link>
+
+                {/* Bio */}
+                <div className="h-[48px] px-5 text-center">
+                  <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                    {f.headline}
+                  </p>
+                </div>
+
+                {/* Location */}
+                <div className="flex h-[24px] items-center justify-center gap-1 text-[11px] text-muted-foreground">
+                  <svg className="size-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                  <span className="truncate">{f.location ?? "Earth"}</span>
+                </div>
+
+                {/* Buttons */}
+                <div className="mt-auto flex gap-2 border-t border-border px-4 py-3">
+                  <Link
+                    href="/sign-up"
+                    className="flex-1 rounded-xl bg-primary py-2.5 text-center text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                  >
+                    Connect
+                  </Link>
+                  <Link
+                    href={`/u/${f.handle}`}
+                    className="flex-1 rounded-xl border border-primary/20 bg-primary/5 py-2.5 text-center text-xs font-semibold text-primary transition-colors hover:border-primary/30 hover:bg-primary/10"
+                  >
+                    Visit Page
+                  </Link>
+                </div>
+              </div>
             </div>
           ))}
         </div>

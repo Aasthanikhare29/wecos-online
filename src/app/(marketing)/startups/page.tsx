@@ -10,11 +10,9 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
   BadgeCheck,
-  ChevronUp,
   Search,
   Crown,
   RotateCcw,
-  ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -22,8 +20,6 @@ import { Input } from "@/components/ui/input";
 import { Container } from "@/components/layout/container";
 import { startups } from "@/lib/sample/sample-data";
 
-const compact = (n: number) =>
-  new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(n);
 const SORTS = ["Trending", "Newest", "Most discussed", "Featured"] as const;
 type Sort = (typeof SORTS)[number];
 
@@ -43,8 +39,7 @@ export default function StartupsDirectoryPage() {
   const [query, setQuery] = useState("");
 const categories = ["All", ...CATEGORY_CARDS];
 const [selectedCategories, setSelectedCategories] = useState<string[]>(categories);  const [sort, setSort] = useState<Sort>("Trending");
-  const [upvoted, setUpvoted] = useState<Set<string>>(new Set());
-  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
+const [showEnquiryModal, setShowEnquiryModal] = useState(false);
 const [selectedStartup, setSelectedStartup] = useState("");
 const [email, setEmail] = useState("");
 const [successMessage, setSuccessMessage] = useState("");
@@ -92,13 +87,6 @@ const toggleCategory = (c: string) => {
     });
 }, [query, selectedCategories, sort]);
 
-  const toggle = (slug: string) =>
-    setUpvoted((prev) => {
-      const next = new Set(prev);
-      if (next.has(slug)) next.delete(slug);
-      else next.add(slug);
-      return next;
-    });
     const resetFilters = () => {
   setQuery("");
   setSelectedCategories(categories);
@@ -231,7 +219,7 @@ return (
             )}
           >
             {sort === item && (
-              <span className="size-1.5 rounded-full bg-white" />
+              <span className="size-1.5 rounded-full bg-primary-foreground" />
             )}
           </span>
 
@@ -263,15 +251,19 @@ return (
         ) : (
           <ul className="grid gap-5 sm:gap-6 xl:grid-cols-2">
            {list.map((s) => {
-  const up = upvoted.has(s.slug);
-
   return (
                <li
   key={s.slug}
-  className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all border-1 hover:border-purple-700 hover:shadow-md"
+  className="relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all border-1 hover:border-primary hover:shadow-md"
 >
-  
-<div className="mb-4 mt-2">
+
+<Link
+  href={`/startup/${s.slug}`}
+  className="absolute inset-0 z-0"
+  aria-label={`Go to ${s.name}`}
+/>
+
+<div className="relative z-10 mb-4 mt-2">
   <div className="flex justify-end">
     <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary">
       <Crown className="size-3.5" />
@@ -280,29 +272,24 @@ return (
   </div>
 </div>
 {/* TOP ROW */}
-<div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+<div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
 <div className="flex min-w-0 items-start gap-3 sm:gap-4">    
-    <Link
-      href={`/startup/${s.slug}`}
-className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-border bg-muted shadow-sm"    >
+    <div className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-border bg-muted shadow-sm">
       <img
         src={s.logoUrl}
         alt={`${s.name} logo`}
         className="h-full w-full object-cover"
       />
-    </Link>
+    </div>
 
     <div className="min-w-0">
       <div className="flex items-center gap-1.5">
-        <Link
-          href={`/startup/${s.slug}`}
-          className="truncate text-xl font-bold leading-tight "
-        >
+        <span className="truncate text-xl font-bold leading-tight">
           {s.name}
-        </Link>
+        </span>
 
         {s.verified && (
-          <BadgeCheck className="size-5 shrink-0 text-purple-700" />
+          <BadgeCheck className="size-5 shrink-0 text-primary" />
         )}
         
       </div>
@@ -313,28 +300,14 @@ className="-mt-4 size-20 shrink-0 overflow-hidden rounded-full border border-bor
       </p>
     </div>
   </div>
-
-  <button
-    type="button"
-    onClick={() => {
-      setSelectedStartup(s.name);
-      setShowEnquiryModal(true);
-    }}
-    className={cn(
-  buttonVariants({ variant: "outline" }),
-"h-9 w-full shrink-0 rounded-xl border-primary px-3 text-xs font-semibold text-primary hover:bg-primary/10 sm:w-auto"
-)}
-  >
-    Enquire
-  </button>
 </div>
   {/* DESCRIPTION */}
-  <p className="mt-5 line-clamp-2 text-sm leading-6 text-muted-foreground">
+  <p className="relative z-10 mt-5 line-clamp-2 text-sm leading-6 text-muted-foreground">
     {s.tagline}
   </p>
 
   {/* TOPICS */}
-<div className="mt-4 flex flex-wrap gap-2">
+<div className="relative z-10 mt-4 flex flex-wrap gap-2">
   {(s.topics ?? []).slice(0, 6).map((t) => (
     <span
       key={t}
@@ -345,34 +318,28 @@ className="rounded-full border border-border bg-muted px-2 py-0.5 text-[10px] fo
 </div>
 
   {/* STATS */}
-  <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+  <div className="relative z-10 mt-4 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
     <span>Founded {s.overview.founded}</span>
     <span>•</span>
     <span>WeCos Joined</span>
   </div>
 
   {/* BOTTOM ROW */}
-  <div className="mt-5 flex items-center justify-between gap-3 border-t border-border pt-4">
-    <Link
-      href={`/startup/${s.slug}`}
-      className="text-sm font-bold text-primary"
-    >
-      Visit Page
-    </Link>
-
+  <div className="relative z-10 mt-auto flex items-center justify-center border-t border-border pt-4">
     <button
       type="button"
-      onClick={() => toggle(s.slug)}
-      aria-pressed={up}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setSelectedStartup(s.name);
+        setShowEnquiryModal(true);
+      }}
       className={cn(
-        "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-bold transition-colors",
-        up
-          ? "bg-primary/10 text-primary"
-          : "text-primary hover:bg-primary/10",
+        buttonVariants({ variant: "default" }),
+        "h-10 px-6 text-sm font-bold"
       )}
     >
-      <ChevronUp className="size-4" />
-      {compact((s.upvotes ?? 0) + (up ? 1 : 0))}
+      Enquire
     </button>
   </div>
 </li>
@@ -424,14 +391,14 @@ className="mt-5 w-full rounded-xl border border-border bg-background px-4 py-3 t
 
       {/* ERROR */}
       {emailError && (
-        <p className="mt-2 text-sm font-medium text-red-600">
+        <p className="mt-2 text-sm font-medium text-destructive">
           {emailError}
         </p>
       )}
 
       {/* SUCCESS */}
       {successMessage && (
-        <p className="mt-2 text-sm font-medium text-green-600">
+        <p className="mt-2 text-sm font-medium text-success">
           {successMessage}
         </p>
       )}
@@ -489,7 +456,7 @@ className="mt-5 w-full rounded-xl border border-border bg-background px-4 py-3 t
               setEmailError("Failed to send enquiry.");
             }
           }}
-          className="flex-1 rounded-xl bg-purple-600 py-3 font-medium text-white hover:bg-purple-700"
+          className="flex-1 rounded-xl bg-primary py-3 font-medium text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>

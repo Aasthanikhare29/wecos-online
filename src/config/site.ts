@@ -83,18 +83,6 @@ export const mainNav: NavItem[] = [
   {
     label: "Home",
     href: "/",
-    children: [
-      {
-        label: "Version 1",
-        href: "/",
-        summary: "Current homepage",
-      },
-      {
-        label: "Version 2",
-        href: "/home-2",
-        summary: "Updated homepage",
-      },
-    ],
   },
   { label: "About", href: "/about" },
   {

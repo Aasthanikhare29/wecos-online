@@ -188,7 +188,7 @@ export default function HomePage() {
         {problems.slice(0, 3).map(({ icon: Icon, problem, solution }, index) => (
           <div
             key={problem}
-            className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-border bg-card px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-200 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
+            className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-border bg-card px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
           >
             <span className="absolute right-6 top-5 text-4xl font-extrabold text-muted-foreground/20 transition-colors group-hover:text-primary/20">
               {String(index + 1).padStart(2, "0")}
@@ -213,7 +213,7 @@ export default function HomePage() {
         {problems.slice(3).map(({ icon: Icon, problem, solution }, index) => (
           <div
             key={problem}
-            className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-border bg-card px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-purple-200 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
+            className="group relative min-h-[210px] overflow-hidden rounded-[26px] border border-border bg-card px-6 py-5 shadow-[0_14px_45px_rgba(88,28,135,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_20px_60px_rgba(88,28,135,0.11)]"
           >
             <span className="absolute right-6 top-5 text-5xl font-extrabold text-muted-foreground/20 transition-colors group-hover:text-primary/20">
               {String(index + 4).padStart(2, "0")}
@@ -257,7 +257,7 @@ export default function HomePage() {
   key={step.title}
   className="group rounded-[24px] border border-border bg-card p-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(124,58,237,0.12)]"
 >
-  <span className="font-mono text-xl font-bold text-purple-600">
+  <span className="font-mono text-xl font-bold text-primary">
     0{i + 1}
   </span>
 
@@ -286,23 +286,24 @@ export default function HomePage() {
   <Container>
     <div className="mx-auto max-w-xl overflow-hidden rounded-3xl border border-border bg-card shadow-[0_24px_70px_rgba(124,58,237,0.12)]">
       <div className="relative overflow-hidden border-b border-border bg-gradient-to-b from-primary/10 to-card p-8 text-center">
-        <div className="absolute left-1/2 top-6 h-36 w-36 -translate-x-1/2 rounded-full bg-purple-300/25 blur-3xl" />
+        <div className="absolute left-1/2 top-6 h-36 w-36 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
 
         <div className="relative z-10">
-          <p className="text-sm font-bold tracking-wide text-purple-600 uppercase">
-            ✦ The Membership
+          <p className="flex items-center justify-center gap-1.5 text-sm font-bold tracking-wide text-primary uppercase">
+            <Sparkles className="size-4" />
+            The Membership
           </p>
 
           <div className="mt-3 flex items-end justify-center gap-1">
             <span className="text-5xl font-extrabold tracking-tight text-foreground">
               {inr(pricing.membershipInr)}
             </span>
-            <span className="pb-1.5 text-purple-600">/year</span>
+            <span className="pb-1.5 text-primary">/year</span>
           </div>
 
           <p className="mt-2 text-sm text-muted-foreground">
             One year of clarity, structure and belonging — about{" "}
-            <span className="font-semibold text-purple-600">
+            <span className="font-semibold text-primary">
               {inr(pricing.perDayInr)}/day.
             </span>
           </p>
@@ -325,7 +326,7 @@ export default function HomePage() {
           href="/membership"
           className={cn(
             buttonVariants({ variant: "default" }),
-            "mt-8 h-12 w-full bg-gradient-to-r from-purple-700 via-purple-600 to-violet-600 text-base text-white shadow-[0_14px_30px_rgba(124,58,237,0.25)] hover:from-purple-800 hover:to-violet-700",
+            "mt-8 h-12 w-full bg-primary text-base text-primary-foreground shadow-[0_14px_30px_rgba(124,58,237,0.25)] hover:bg-primary/90",
           )}
         >
           Join the Founding {pricing.foundingSeats} — {inr(pricing.membershipInr)}/year
@@ -416,7 +417,7 @@ export default function HomePage() {
             href="/sign-up"
             className={cn(
               buttonVariants({ variant: "default" }),
-              "h-12 rounded-xl bg-violet-600 px-7 text-base text-white shadow-[0_12px_30px_rgba(124,58,237,0.35)] hover:bg-violet-500",
+              "h-12 rounded-xl bg-primary px-7 text-base text-primary-foreground shadow-[0_12px_30px_rgba(124,58,237,0.35)] hover:bg-primary/90",
             )}
           >
             Start My Engine

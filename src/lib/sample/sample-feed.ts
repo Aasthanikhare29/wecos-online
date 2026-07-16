@@ -62,7 +62,7 @@ export const sampleFeed: FeedPost[] = [
     content: {
       kind: "photo",
       body: "First production run of our hand-finished dinnerware. Plastic-free, start to finish.",
-      images: ["https://images.unsplash.com/photo-1610701596007-11502861dcfa?w=1200&q=70"],
+      images: ["https://picsum.photos/seed/dinnerware/1200/630"],
     },
     score: 176,
     myVote: 0,
@@ -129,7 +129,7 @@ export const sampleFeed: FeedPost[] = [
       kind: "video",
       body: "Quick demo of our new seller onboarding flow — 90 seconds, zero paperwork.",
       src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBigBuckBunny.mp4",
-      poster: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=1200&q=70",
+      poster: "https://picsum.photos/seed/seller-onboard/1200/630",
     },
     score: 44,
     myVote: 0,
