@@ -118,7 +118,7 @@ export default function HomePage() {
 
             <h1 className="mt-6 max-w-5xl text-4xl font-extrabold tracking-tight text-balance sm:text-6xl">
               Build Better. Prove Faster.
-              <span className="block text-primary">Grow Calmer.</span>
+              <span className="block text-primary">Grow Stronger.</span>
             </h1>
 
             <p className="mt-4 text-xl font-semibold text-foreground">

@@ -5,9 +5,12 @@ import {
   Check,
   Coffee,
   Compass,
+  Crown,
   Leaf,
   Lightbulb,
+  Rocket,
   Sparkles,
+  Star,
   Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -65,14 +68,52 @@ const stepImages = [
   "/belong.png",
 ];
 
-const benefits = [
-  "Startup Validation Report — AI + mentor feedback in 48 hours",
-  "Founder Page — your public startup identity",
-  "Growth Toolkit — GTM, financials, decks, templates",
-  "Founder Fridays — weekly sessions with top operators",
-  "Coffee Club Access — monthly meetups in your city",
-  "Mentorship Circle — learn from founders who've built before",
-  "SaaS Perks & Credits (₹50,000+)",
+const pricingPlans = [
+  {
+    name: "Studio",
+    icon: Rocket,
+    price: 499,
+    description: "For solo founders validating their first idea.",
+    features: [
+      "AI-powered Startup Validation Report",
+      "Founder Page — your public startup identity",
+      "Access to Growth Toolkit templates",
+      "Community chat access",
+    ],
+    cta: "Start with Studio",
+    highlighted: false,
+  },
+  {
+    name: "Network",
+    icon: Users,
+    price: 1299,
+    description: "For founders ready to connect and grow faster.",
+    features: [
+      "Everything in Studio",
+      "Coffee Club access — monthly city meetups",
+      "Mentorship Circle — learn from experienced founders",
+      "Founder Fridays — weekly sessions with operators",
+      "Priority support",
+    ],
+    cta: "Join the Network",
+    highlighted: false,
+  },
+  {
+    name: "Package",
+    icon: Star,
+    price: 1499,
+    description: "The complete startup engine — nothing held back.",
+    features: [
+      "Everything in Network",
+      "Full Growth Toolkit — GTM, financials, decks, playbooks",
+      "SaaS Perks & Credits (₹50,000+)",
+      "1-on-1 mentor matching",
+      "Exclusive founder events & retreats",
+      "Lifetime community badge",
+    ],
+    cta: "Get the Full Package",
+    highlighted: true,
+  },
 ];
 
 function SectionHeading({
@@ -115,7 +156,7 @@ export default function HomePage() {
 
             <h1 className="mt-6 max-w-5xl text-4xl font-extrabold tracking-tight text-balance sm:text-6xl">
               Build Better. Prove Faster.
-              <span className="block text-primary">Grow Calmer.</span>
+              <span className="block text-primary">Grow Stronger.</span>
             </h1>
 
             <p className="mt-4 text-xl font-semibold text-foreground">
@@ -279,61 +320,86 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* Membership */}
+      {/* Pricing Plans */}
       <section className="border-t border-border/60 py-20 sm:py-24">
         <Container>
-          <div className="mx-auto max-w-xl overflow-hidden rounded-3xl border border-border bg-card shadow-[0_24px_70px_rgba(124,58,237,0.12)]">
-            <div className="relative overflow-hidden border-b border-border bg-gradient-to-b from-primary/10 to-card p-8 text-center">
-              <div className="absolute left-1/2 top-6 h-36 w-36 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+          <SectionHeading
+            eyebrow="Pricing"
+            title="Pick the plan that fits your stage."
+            subtitle="Start small, grow fast. Every plan includes access to India's fastest-growing startup community."
+          />
 
-              <div className="relative z-10">
-                <p className="flex items-center justify-center gap-1.5 text-sm font-bold tracking-wide text-primary uppercase">
-                  <Sparkles className="size-4" />
-                  The Membership
-                </p>
-
-                <div className="mt-3 flex items-end justify-center gap-1">
-                  <span className="text-5xl font-extrabold tracking-tight text-foreground">
-                    {inr(pricing.membershipInr)}
-                  </span>
-                  <span className="pb-1.5 text-primary">/year</span>
-                </div>
-
-                <p className="mt-2 text-sm text-muted-foreground">
-                  One year of clarity, structure and belonging — about{" "}
-                  <span className="font-semibold text-primary">
-                    {inr(pricing.perDayInr)}/day.
-                  </span>
-                </p>
-              </div>
-            </div>
-
-            <div className="p-8">
-              <ul className="grid gap-3">
-                {benefits.map((b) => (
-                  <li key={b} className="flex items-start gap-3 text-sm">
-                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
-                      <Check className="size-3.5" />
-                    </span>
-                    <span className="text-foreground/90">{b}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/membership"
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {pricingPlans.map(({ name, icon: Icon, price, description, features, cta, highlighted }) => (
+              <div
+                key={name}
                 className={cn(
-                  buttonVariants({ variant: "default" }),
-                  "mt-8 h-12 w-full bg-primary text-base text-primary-foreground shadow-[0_14px_30px_rgba(124,58,237,0.25)] hover:bg-primary/90",
+                  "relative flex flex-col overflow-hidden rounded-3xl border bg-card transition-all duration-300",
+                  highlighted
+                    ? "border-primary/40 shadow-[0_24px_70px_rgba(124,58,237,0.15)]"
+                    : "border-border shadow-[0_14px_45px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(124,58,237,0.1)]"
                 )}
               >
-                Join the Founding {pricing.foundingSeats} — {inr(pricing.membershipInr)}/year
-              </Link>
+                <div className="flex items-center justify-between p-8 pb-6">
+                  <div className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary">
+                    <Icon className="size-5" />
+                  </div>
 
-              <p className="mt-3 text-center text-xs text-muted-foreground">
-                Total value {inr(pricing.valueInr)}+. Pay once. Build calmly all year.
-              </p>
-            </div>
+                  {highlighted ? (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary">
+                      <Crown className="size-3.5" />
+                      Recommended
+                    </span>
+                  ) : null}
+                </div>
+
+                <div className="px-8 pb-6">
+                  <h3 className="text-xl font-bold tracking-tight text-foreground">
+                    {name}
+                  </h3>
+
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {description}
+                  </p>
+
+                  <div className="mt-5 flex items-end gap-1">
+                    <span className="text-4xl font-extrabold tracking-tight text-foreground">
+                      {inr(price)}
+                    </span>
+                    <span className="pb-1 text-primary">/month</span>
+                  </div>
+                </div>
+
+                <div className="flex-1 border-t border-border p-8">
+                  <ul className="grid gap-3">
+                    {features.map((f) => (
+                      <li key={f} className="flex items-start gap-3 text-sm">
+                        <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-primary/10 text-primary">
+                          <Check className="size-3.5" />
+                        </span>
+                        <span className="text-foreground/90">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="p-8 pt-6">
+                  <Link
+                    href="/sign-up"
+                    className={cn(
+                      buttonVariants({ variant: highlighted ? "default" : "outline" }),
+                      cn(
+                        "h-12 w-full text-base",
+                        highlighted && "bg-primary text-primary-foreground shadow-[0_14px_30px_rgba(124,58,237,0.25)] hover:bg-primary/90"
+                      )
+                    )}
+                  >
+                    {cta}
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </Container>
       </section>

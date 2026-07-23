@@ -11,7 +11,7 @@ export const siteConfig = {
   legalName: "The Grey Hawks x WeCos",
   tagline: "India's Startup Engine",
   description:
-    "Build better, prove faster, grow calmer. WeCos helps founders turn ideas into validated startups — powered by AI systems and guided by human mentors.",
+    "Build better, prove faster, grow stronger. WeCos helps founders turn ideas into validated startups — powered by AI systems and guided by human mentors.",
   url: "https://www.wecos.co",
   email: "start@wecos.co",
 } as const;

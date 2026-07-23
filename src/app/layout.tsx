@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · WeCos",
   },
   description:
-    "Build better, prove faster, grow calmer. WeCos helps founders turn ideas into validated startups — powered by AI systems and guided by human mentors.",
+    "Build better, prove faster, grow stronger. WeCos helps founders turn ideas into validated startups — powered by AI systems and guided by human mentors.",
   metadataBase: new URL("https://www.wecos.co"),
 };
 
